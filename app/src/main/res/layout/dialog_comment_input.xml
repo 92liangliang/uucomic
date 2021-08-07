@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/tv_danmu_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <View
+            style="@style/line_vertical_1px_light"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:hint="说点什么..."
+            android:imeOptions="actionSend"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textColor="#333"
+            android:textColorHint="#999"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_send_message"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_send_message" />
+
+    </LinearLayout>
+
+</LinearLayout>

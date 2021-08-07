@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="66dp"
+    android:padding="7dp">
+
+
+    <ProgressBar
+        android:id="@+id/iv"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/anim_path1" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text=""
+        android:visibility="gone"
+        android:textColor="#ff4800"
+        android:textSize="7sp" />
+
+
+</FrameLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_container_fragment_tab_comment">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+            android:id="@+id/ll_input_comment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/rv_container_fragment_tab_comment"
+            android:background="@drawable/bg_r_16_grey2_side"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+        <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="我已经忍不住要吐槽啦~"
+                android:drawableLeft="@mipmap/ic_comment_logo"
+                android:paddingLeft="16dp"
+                android:textColorHint="#999"
+                android:textSize="14dp" />
+    </LinearLayout>
+
+</RelativeLayout>
