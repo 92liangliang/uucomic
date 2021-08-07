@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="100dp"
-    android:layout_height="170dp"
-    android:layout_margin="5dp"
-    android:layout_marginBottom="5dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="100dp"
+        android:layout_height="170dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+    <android.support.v7.widget.CardView
             android:id="@+id/cv_cell_book_home"
             android:layout_width="100dp"
             android:layout_height="0dp"
@@ -20,11 +20,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.constraint.ConstraintLayout
+        <android.support.constraint.ConstraintLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent">
 
-                <ImageView
+            <ImageView
                     android:id="@+id/iv_cover_cell_book_home"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@mipmap/ic_logo" />
 
-                <TextView
+            <TextView
                     android:id="@+id/tv_score_cell_book_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="9.4分" />
 
-                <TextView
+            <TextView
                     android:id="@+id/tv_recentWords_cell_book_home"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -64,35 +64,35 @@
                     tools:ignore="RtlSymmetry" />
 
 
-            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
 
-        </android.support.v7.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/tv_name_cell_book_home"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_small"
-        app:layout_constraintBottom_toTopOf="@id/tv_summary_cell_book_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="一天" />
+    </android.support.v7.widget.CardView>
 
 
     <TextView
-        android:id="@+id/tv_summary_cell_book_home"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textColor="@color/colorGrey"
-        android:textSize="@dimen/text_size_smaller"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="穿越千年回老本行" />
+            android:id="@+id/tv_name_cell_book_home"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_summary_cell_book_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="一天" />
+
+
+    <TextView
+            android:id="@+id/tv_summary_cell_book_home"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/text_size_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="穿越千年回老本行" />
 
 </LinearLayout>

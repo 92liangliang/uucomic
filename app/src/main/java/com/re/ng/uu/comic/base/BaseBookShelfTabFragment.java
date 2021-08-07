@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.rdc.bms.easy_rv_adapter.fragment.AbsFragment;
 import com.re.ng.uu.comic.R;
 import com.re.ng.uu.comic.listener.OnEditListener;
+import com.re.ng.uu.comic.util.LogUtil;
 import com.re.ng.uu.comic.util.ScreenUtil;
 
 public abstract class BaseBookShelfTabFragment extends
@@ -41,6 +42,7 @@ public abstract class BaseBookShelfTabFragment extends
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        LogUtil.e(getClass().getName() + " onCreate fragment start === ");
         mRootView = super.onCreateView(inflater, container, savedInstanceState);
         mRootContainer = mRootView.findViewById(R.id.root_container_layout);
         isPrepared = true;
@@ -101,22 +103,23 @@ public abstract class BaseBookShelfTabFragment extends
      * 添加底部全选和删除布局
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    protected void addBottomCheckLayout(){
+    protected void addBottomCheckLayout() {
 
         mCheckLayout = LayoutInflater.from(mBaseActivity).inflate(
                 R.layout.layout_check,
                 null);
-        mCheckLayout.setTranslationZ(ScreenUtil.dip2px(mBaseActivity,15));
+        mCheckLayout.setTranslationZ(ScreenUtil.dip2px(mBaseActivity, 15));
         final TextView tvSelectAll = mCheckLayout.findViewById(R.id.tv_select_all_layout_check);
         TextView tvDelete = mCheckLayout.findViewById(R.id.tv_delete_layout_check);
         tvSelectAll.setOnClickListener(new View.OnClickListener() {
             boolean selectAll = true;
+
             @Override
             public void onClick(View v) {
                 onSelectAll(selectAll);
-                if (selectAll){
+                if (selectAll) {
                     tvSelectAll.setText("取消全选");
-                }else {
+                } else {
                     tvSelectAll.setText("全选");
                 }
                 selectAll = !selectAll;
@@ -129,12 +132,12 @@ public abstract class BaseBookShelfTabFragment extends
             }
         });
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_CONSTRAINT,ScreenUtil.dip2px(mBaseActivity,50)
+                ConstraintLayout.LayoutParams.MATCH_CONSTRAINT, ScreenUtil.dip2px(mBaseActivity, 50)
         );
         layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID;
         layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID;
         layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
-        layoutParams.bottomMargin = ScreenUtil.dip2px(mBaseActivity,0.5f);
+        layoutParams.bottomMargin = ScreenUtil.dip2px(mBaseActivity, 0.5f);
         mCheckLayout.setLayoutParams(layoutParams);
         mRootContainer.addView(mCheckLayout);
     }
@@ -142,7 +145,7 @@ public abstract class BaseBookShelfTabFragment extends
     /**
      * 删除底部全选和删除布局
      */
-    protected void removerBottomCheckLayout(){
+    protected void removerBottomCheckLayout() {
         mRootContainer.removeView(mCheckLayout);
     }
 }

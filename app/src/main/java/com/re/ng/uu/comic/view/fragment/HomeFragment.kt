@@ -3,6 +3,7 @@ package com.re.ng.uu.comic.view.fragment
 import android.content.Context
 import android.graphics.ColorMatrixColorFilter
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.*
 import com.re.ng.uu.comic.listener.OnScrollYChangeForAlphaListener
+import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.ScreenUtil
 import com.re.ng.uu.comic.util.StartActUtil
 import com.youth.banner.BannerConfig
@@ -52,13 +54,18 @@ class HomeFragment : BaseLazyFragment() {
                 Constant.TYPE_RANK
             )
         })
-        iv_search_fragment_home.setOnClickListener(View.OnClickListener { StartActUtil.toSearchAct(mBaseActivity) })
+        iv_bg_search_fragment_home.setOnClickListener(View.OnClickListener {
+            StartActUtil.toSearchAct(
+                mBaseActivity
+            )
+        })
     }
 
     override fun initView() {
         // 200dp为banner高度,75dp为标题栏高度
         scrollView_fragment_home.setOffsetDistance(ScreenUtil.dip2px(mBaseActivity, 200f - 75))
-        scrollView_fragment_home.setOnScrollYChangeForAlphaListener(object : OnScrollYChangeForAlphaListener {
+        scrollView_fragment_home.setOnScrollYChangeForAlphaListener(object :
+            OnScrollYChangeForAlphaListener {
             override fun changeTopLayoutTransport(alpha: Int) {
                 setTopLayoutTransparency(alpha)
             }
@@ -83,7 +90,6 @@ class HomeFragment : BaseLazyFragment() {
     fun setTopLayoutTransparency(alpha: Int) {
         cl_top_fragment_home.getBackground().mutate().setAlpha(alpha)
         val scale = alpha / 255f
-        tv_title_fragment_home.setAlpha(scale)
         //白->红
         iv_search_fragment_home.setColorFilter(
             ColorMatrixColorFilter(
@@ -98,7 +104,30 @@ class HomeFragment : BaseLazyFragment() {
                 )
             )
         )
-        iv_bg_left_fragment_home.setAlpha(1 - scale)
+        LogUtil.e("scal=" + scale)
+        if (scale < 0.2) {
+            tv_title_fragment_home.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorWhite
+                )
+            )
+        } else if (scale > 0.2 && scale < 0.7) {
+            tv_title_fragment_home.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorMidRed
+                )
+            )
+        } else {
+            tv_title_fragment_home.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorRed
+                )
+            )
+        }
+//        iv_bg_left_fragment_home.setAlpha(1 - scale)
         iv_bg_search_fragment_home.setAlpha(1 - scale)
     }
 

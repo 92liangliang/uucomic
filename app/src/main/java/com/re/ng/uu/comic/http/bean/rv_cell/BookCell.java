@@ -14,6 +14,7 @@ import com.re.ng.uu.comic.R;
 import com.re.ng.uu.comic.config.ApiConstant;
 import com.re.ng.uu.comic.config.ItemType;
 import com.re.ng.uu.comic.http.bean.BookBean;
+import com.re.ng.uu.comic.util.LogUtil;
 import com.re.ng.uu.comic.util.ScreenUtil;
 
 public class BookCell extends BaseRvCell<BookBean> {
@@ -29,7 +30,7 @@ public class BookCell extends BaseRvCell<BookBean> {
 
     }
 
-    public void setGrid(boolean isGrid){
+    public void setGrid(boolean isGrid) {
         this.isGrid = isGrid;
     }
 
@@ -40,11 +41,11 @@ public class BookCell extends BaseRvCell<BookBean> {
 
     @Override
     public BaseRvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_book_home,parent,false);
-        if (isGrid){
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_book_home, parent, false);
+        if (isGrid) {
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            layoutParams.bottomMargin = ScreenUtil.dip2px(parent.getContext(),10);
+            layoutParams.bottomMargin = ScreenUtil.dip2px(parent.getContext(), 10);
             view.setLayoutParams(layoutParams);
         }
         return new BaseRvViewHolder(view);
@@ -68,13 +69,17 @@ public class BookCell extends BaseRvCell<BookBean> {
         tvRecentWords.setText("");
         tvSummary.setText(mData.getSummary());
         String coverUrl = ApiConstant.getFormatUrl(mData.getCover_url());
+        LogUtil.d("image coverUrl=",coverUrl);
+        LogUtil.d("image data=",mData.getCover_url());
+        LogUtil.d("image name=",mData.getBook_name());
+        LogUtil.d("image--------------------------------");
         Glide.with(holder.getContext()).load(coverUrl).into(ivCover);
 
-        if (mListener != null){
+        if (mListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onClickItem(mData,position);
+                    mListener.onClickItem(mData, position);
                 }
             });
         }

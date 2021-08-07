@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.re.ng.uu.comic.util.LogUtil;
+
 public abstract class BaseLazyFragment extends Fragment {
     protected BaseActivity mBaseActivity;  //贴附的activity,Fragment中可能用到
     protected View mRootView;           //根view
@@ -28,6 +30,7 @@ public abstract class BaseLazyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtil.e(getClass().getName()+" onCreate fragment start === ");
         mRootView = LayoutInflater.from(getContext()).inflate(setLayoutResourceId(), null);
         return mRootView;
     }

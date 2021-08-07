@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rdc.bms.easy_rv_adapter.fragment.AbsFragment;
+import com.re.ng.uu.comic.util.LogUtil;
 
 public abstract class BaseLazyAbsFragment extends AbsFragment {
 
@@ -30,6 +31,7 @@ public abstract class BaseLazyAbsFragment extends AbsFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtil.e(getClass().getName()+" onCreate fragment start === ");
         mRootView = super.onCreateView(inflater, container, savedInstanceState);
         isPrepared = true;
         return mRootView;

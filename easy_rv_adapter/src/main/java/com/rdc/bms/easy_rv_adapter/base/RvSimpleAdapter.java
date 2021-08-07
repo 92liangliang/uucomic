@@ -32,12 +32,13 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     private boolean mIsShowLoading = false;
     private boolean mIsShowEmpty = false;
 
-    public RvSimpleAdapter(){
+    public RvSimpleAdapter() {
         mEmptyCell = new EmptyCell(null);
         mErrorCell = new ErrorCell(null);
         mLoadingCell = new LoadingCell(null);
         mLoadMoreCell = new LoadMoreCell(null);
     }
+
     @Override
     protected void onViewHolderBound(BaseRvViewHolder holder, int position) {
 
@@ -48,7 +49,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         //处理GridView 布局
-        if(manager instanceof GridLayoutManager){
+        if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
@@ -59,7 +60,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
                     return (viewType == ERROR_TYPE
                             || viewType == EMPTY_TYPE
                             || viewType == LOADING_TYPE
-                            || viewType == LOAD_MORE_TYPE) ? gridLayoutManager.getSpanCount():1;
+                            || viewType == LOAD_MORE_TYPE) ? gridLayoutManager.getSpanCount() : 1;
                 }
             });
         }
@@ -72,11 +73,11 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
         // 处理 StaggeredGridLayoutManager 显示这个Span
         int position = holder.getAdapterPosition();
         int viewType = getItemViewType(position);
-        if(isStaggeredGridLayout(holder)){
-            if(viewType == ERROR_TYPE
+        if (isStaggeredGridLayout(holder)) {
+            if (viewType == ERROR_TYPE
                     || viewType == EMPTY_TYPE
                     || viewType == LOADING_TYPE
-                    || viewType == LOAD_MORE_TYPE){
+                    || viewType == LOAD_MORE_TYPE) {
                 //当View为各种状态（empty,error,loading..）时，占满格
                 StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
                 //设置显示整个span
@@ -88,6 +89,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 判断是否是瀑布流布局
+     *
      * @param holder
      * @return
      */
@@ -102,9 +104,10 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * 显示LoadingView(默认方法)
      * <p>请求数据时调用，数据请求完毕时调用{@link #hideLoading }</p>
+     *
      * @see #showLoadingKeepCount(int)
      */
-    public void showLoading(){
+    public void showLoading() {
         clear();
         mIsShowLoading = true;
         add(mLoadingCell);
@@ -112,20 +115,22 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 列表Loading 状态显示的View，默认全屏高度
+     *
      * @param loadingView
      * @see {@link #showEmpty(View, int)}
      */
-    public void showLoading(View loadingView){
-        showLoading(loadingView,0);
+    public void showLoading(View loadingView) {
+        showLoading(loadingView, 0);
     }
 
     /**
      * 指定列表Loading 状态显示的View，并指定View显示高度
+     *
      * @param loadingView
      * @param viewHeight
      */
-    public void showLoading(View loadingView,int viewHeight){
-        if(loadingView == null){
+    public void showLoading(View loadingView, int viewHeight) {
+        if (loadingView == null) {
             showLoading();
             return;
         }
@@ -135,38 +140,42 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
         mLoadingCell.setHeight(viewHeight);
         add(mLoadingCell);
     }
+
     /**
      * 列表LoadingView 状态显示的View
      * <p>列表显示LoadingView并保留keepCount个Item</p>
+     *
      * @param keepCount 保留的条目数量
      */
-    public void showLoadingKeepCount(int keepCount){
-        showLoadingKeepCount(keepCount,0);
+    public void showLoadingKeepCount(int keepCount) {
+        showLoadingKeepCount(keepCount, 0);
     }
 
     /**
      * 列表Loading状态显示的View，保留keepCountg个Item，并指定高度
+     *
      * @param keepCount 保留item的个数
-     * @param height View显示的高度
+     * @param height    View显示的高度
      */
-    public void showLoadingKeepCount(int keepCount,int height){
-        showLoadingKeepCount(keepCount,height,null);
+    public void showLoadingKeepCount(int keepCount, int height) {
+        showLoadingKeepCount(keepCount, height, null);
     }
 
     /**
      * 列表Loading状态显示的View，保留keepCountg个Item，并指定高度，指定显示的View
-     * @param keepCount 保留item的个数
-     * @param height View显示的高度
+     *
+     * @param keepCount   保留item的个数
+     * @param height      View显示的高度
      * @param loadingView 显示的View
      */
-    public void showLoadingKeepCount(int keepCount,int height,View loadingView){
-        if(keepCount < 0 || keepCount>mData.size()){
+    public void showLoadingKeepCount(int keepCount, int height, View loadingView) {
+        if (keepCount < 0 || keepCount > mData.size()) {
             return;
         }
-        remove(keepCount,mData.size() - keepCount);
+        remove(keepCount, mData.size() - keepCount);
         checkNotContainSpecialCell();
         mIsShowLoading = true;
-        if(loadingView!=null){
+        if (loadingView != null) {
             mLoadingCell.setView(loadingView);
         }
         mLoadingCell.setHeight(height);
@@ -177,8 +186,8 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * hide Loading view
      */
-    public void hideLoading(){
-        if(mData.contains(mLoadingCell)){
+    public void hideLoading() {
+        if (mData.contains(mLoadingCell)) {
             mData.remove(mLoadingCell);
             mIsShowLoading = false;
         }
@@ -187,9 +196,10 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * 显示错误提示View
      * <p>当网络请求发生错误，需要在界面给出错误提示时，调用{@link #showError}</p>
+     *
      * @see #showErrorKeepCount(int)
      */
-    public void showError(){
+    public void showError() {
         clear();
         mIsShowError = true;
         add(mErrorCell);
@@ -198,35 +208,38 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * 显示错误提示View
      * <p>当网络请求发生错误，需要在界面给出错误提示时，调用{@link #showErrorKeepCount(int)},并保留keepCount 条Item</p>
+     *
      * @param keepCount 保留Item数量
      */
-    public void showErrorKeepCount(int keepCount){
-        showErrorKeepCount(keepCount,0);
+    public void showErrorKeepCount(int keepCount) {
+        showErrorKeepCount(keepCount, 0);
     }
 
     /**
-     *  显示错误提示View，并指定保留的item数和View显示的高
+     * 显示错误提示View，并指定保留的item数和View显示的高
+     *
      * @param keepCount 保留的item数
-     * @param height view显示的高
+     * @param height    view显示的高
      */
-    public void showErrorKeepCount(int keepCount,int height){
-        showErrorKeepCount(keepCount,height,null);
+    public void showErrorKeepCount(int keepCount, int height) {
+        showErrorKeepCount(keepCount, height, null);
     }
 
     /**
-     *  显示错误提示View，并指定保留的item数和View显示的高
+     * 显示错误提示View，并指定保留的item数和View显示的高
+     *
      * @param keepCount 保留的item数
-     * @param height view显示的高
+     * @param height    view显示的高
      * @param errorView 指定显示的View，null 则显示默认View
      */
-    public void showErrorKeepCount(int keepCount,int height,View errorView){
-        if(keepCount < 0 || keepCount>mData.size()){
+    public void showErrorKeepCount(int keepCount, int height, View errorView) {
+        if (keepCount < 0 || keepCount > mData.size()) {
             return;
         }
-        remove(keepCount,mData.size() - keepCount);
+        remove(keepCount, mData.size() - keepCount);
         checkNotContainSpecialCell();
         mIsShowError = true;
-        if(errorView!=null){
+        if (errorView != null) {
             mErrorCell.setView(errorView);
         }
         mErrorCell.setHeight(height);
@@ -235,20 +248,22 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 指定列表发生错误时显示的View，默认为全屏高度
+     *
      * @param errorView
      * @see {@link #showError(View, int)}
      */
-    public void showError(View errorView){
-        showError(errorView,0);
+    public void showError(View errorView) {
+        showError(errorView, 0);
     }
 
     /**
      * 指定列表发生错误时显示的View，并指定View高度
+     *
      * @param errorView
      * @param viewHeight
      */
-    public void showError(View errorView,int viewHeight){
-        if(errorView == null){
+    public void showError(View errorView, int viewHeight) {
+        if (errorView == null) {
             showError();
             return;
         }
@@ -262,8 +277,8 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * 隐藏错误提示
      */
-    public void hideErorr(){
-        if(mData.contains(mErrorCell)){
+    public void hideErorr() {
+        if (mData.contains(mErrorCell)) {
             remove(mErrorCell);
             mIsShowError = false;
         }
@@ -273,10 +288,9 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
      * 显示LoadMoreView
      * <p>当列表滑动到底部时，调用{@link #showLoadMore()} 提示加载更多，加载完数据，调用{@link #hideLoadMore()}
      * 隐藏LoadMoreView,显示列表数据。</p>
-     *
      */
-    public void showLoadMore(){
-        if(mData.contains(mLoadMoreCell)){
+    public void showLoadMore() {
+        if (mData.contains(mLoadMoreCell)) {
             return;
         }
         checkNotContainSpecialCell();
@@ -286,27 +300,29 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 指定显示的LoadMore View
+     *
      * @param loadMoreView
      */
-    public void showLoadMore(View loadMoreView){
-        showLoadMore(loadMoreView,0);
+    public void showLoadMore(View loadMoreView) {
+        showLoadMore(loadMoreView, 0);
     }
 
     /**
      * 指定显示的LoadMoreView,并指定显示的高度
+     *
      * @param loadMoreView
      * @param height
      */
-    public void showLoadMore(View loadMoreView,int height){
-        if(loadMoreView == null){
+    public void showLoadMore(View loadMoreView, int height) {
+        if (loadMoreView == null) {
             return;
         }
         checkNotContainSpecialCell();
         //设置默认高度
-        if(height == 0){
-            int defaultHeight = Utils.dpToPx(loadMoreView.getContext(),LoadMoreCell.mDefaultHeight);
+        if (height == 0) {
+            int defaultHeight = Utils.dpToPx(loadMoreView.getContext(), LoadMoreCell.mDefaultHeight);
             mLoadMoreCell.setHeight(defaultHeight);
-        }else{
+        } else {
             mLoadMoreCell.setHeight(height);
         }
         mLoadMoreCell.setView(loadMoreView);
@@ -318,8 +334,8 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
      * 隐藏LoadMoreView
      * <p>调用{@link #showLoadMore()}之后，加载数据完成，调用{@link #hideLoadMore()}隐藏LoadMoreView</p>
      */
-    public void hideLoadMore(){
-        if(mData.contains(mLoadMoreCell)){
+    public void hideLoadMore() {
+        if (mData.contains(mLoadMoreCell)) {
             remove(mLoadMoreCell);
             mIsShowLoadMore = false;
         }
@@ -327,6 +343,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * LoadMore View 是否已经显示
+     *
      * @return
      */
     public boolean isShowLoadMore() {
@@ -335,38 +352,40 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 显示空状态View，并保留keepCount个Item
+     *
      * @param keepCount
      */
-    public void showEmptyKeepCount(int keepCount){
-        showEmptyKeepCount(keepCount,0);
+    public void showEmptyKeepCount(int keepCount) {
+        showEmptyKeepCount(keepCount, 0);
     }
 
     /**
      * 显示空状态View，保留keepCount个Item,并指定View显示的高
-     * @param keepCount 保留的Item个数
-     * @param height View 显示的高度
      *
+     * @param keepCount 保留的Item个数
+     * @param height    View 显示的高度
      * @see {@link #showEmptyKeepCount(int)}
      * @see {@link #showEmptyKeepCount(int, int, View)}
      */
-    public void showEmptyKeepCount(int keepCount,int height){
-        showEmptyKeepCount(keepCount,height,null);
+    public void showEmptyKeepCount(int keepCount, int height) {
+        showEmptyKeepCount(keepCount, height, null);
     }
 
     /**
      * 显示空状态View，保留keepCount个Item,并指定View和View显示的高
+     *
      * @param keepCount 保留的Item个数
-     * @param height 显示的View的高
-     * @param view 显示的View，null 则显示默认View
+     * @param height    显示的View的高
+     * @param view      显示的View，null 则显示默认View
      */
-    public void showEmptyKeepCount(int keepCount,int height,View view){
-        if(keepCount < 0 || keepCount>mData.size()){
+    public void showEmptyKeepCount(int keepCount, int height, View view) {
+        if (keepCount < 0 || keepCount > mData.size()) {
             return;
         }
-        remove(keepCount,mData.size() - keepCount);
+        remove(keepCount, mData.size() - keepCount);
         checkNotContainSpecialCell();
         mIsShowEmpty = true;
-        if(view !=null){
+        if (view != null) {
             mEmptyCell.setView(view);
         }
         mEmptyCell.setHeight(height);
@@ -377,7 +396,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
      * 显示空view
      * <p>当页面没有数据的时候，调用{@link #showEmpty()}显示空View，给用户提示</p>
      */
-    public void showEmpty(){
+    public void showEmpty() {
         clear();
         mIsShowEmpty = true;
         add(mEmptyCell);
@@ -385,11 +404,12 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 显示指定的空状态View，并指定View显示的高度
+     *
      * @param emptyView  页面为空状态显示的View
      * @param viewHeight view显示的高
      */
-    public void showEmpty(View emptyView,int viewHeight){
-        if(emptyView == null){
+    public void showEmpty(View emptyView, int viewHeight) {
+        if (emptyView == null) {
             showEmpty();
             return;
         }
@@ -402,18 +422,19 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
 
     /**
      * 显示指定的空状态View,默认显示屏幕高度
+     *
      * @param emptyView
      * @see {@link #showEmpty(View, int)}
      */
-    public void showEmpty(View emptyView){
-        showEmpty(emptyView,0);
+    public void showEmpty(View emptyView) {
+        showEmpty(emptyView, 0);
     }
 
     /**
      * 隐藏空View
      */
-    public void hideEmpty(){
-        if(mData.contains(mEmptyCell)){
+    public void hideEmpty() {
+        if (mData.contains(mEmptyCell)) {
             remove(mEmptyCell);
             mIsShowEmpty = false;
         }
@@ -422,7 +443,7 @@ public class RvSimpleAdapter extends BaseRvAdapter<BaseRvCell> {
     /**
      * 检查列表是否已经包含了这4种Cell(若包含则移除)
      */
-    private void checkNotContainSpecialCell(){
+    private void checkNotContainSpecialCell() {
         mData.remove(mEmptyCell);
         mData.remove(mErrorCell);
         mData.remove(mLoadingCell);
