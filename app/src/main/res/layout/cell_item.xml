@@ -1,81 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
-    <ImageView
-            android:id="@+id/iv_icon_cell_item"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/svg_pic_list_fire" />
+    <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
 
-    <TextView
-            android:id="@+id/tv_title_cell_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:singleLine="true"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text_size_bigger"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_icon_cell_item"
-            app:layout_constraintStart_toEndOf="@id/iv_icon_cell_item"
-            app:layout_constraintTop_toTopOf="@id/iv_icon_cell_item"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="最近更新" />
+        <ImageView
+                android:id="@+id/iv_icon_cell_item"
+                android:layout_centerVertical="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                tools:src="@mipmap/svg_pic_list_fire" />
 
-    <TextView
-            android:id="@+id/tv_intro_cell_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:singleLine="true"
-            android:textColor="@color/colorGrey"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintBottom_toBottomOf="@id/tv_title_cell_item"
-            app:layout_constraintEnd_toStartOf="@id/tv_more_cell_item"
-            app:layout_constraintHorizontal_bias="0.03"
-            app:layout_constraintStart_toEndOf="@id/tv_title_cell_item"
-            app:layout_constraintTop_toTopOf="@id/tv_title_cell_item"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="独家精品私人定制" />
+        <TextView
+                android:layout_toEndOf="@+id/iv_icon_cell_item"
+                android:layout_toRightOf="@+id/iv_icon_cell_item"
+                android:id="@+id/tv_title_cell_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_bigger"
+                android:textStyle="bold"
+                tools:text="最近更新" />
 
-    <TextView
-            android:id="@+id/tv_more_cell_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingStart="3dp"
-            android:paddingEnd="3dp"
-            android:background="@drawable/bg_oval_stroke"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="visible"
-            android:text="@string/more"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintBottom_toBottomOf="@id/iv_icon_cell_item"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+                android:layout_toEndOf="@+id/tv_title_cell_item"
+                android:layout_toRightOf="@+id/tv_title_cell_item"
+                android:id="@+id/tv_intro_cell_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_size_small"
+                tools:text="独家精品私人定制" />
+
+            <RelativeLayout
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/relative_layout_mode"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="80dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tv_more_cell_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:layout_toStartOf="@+id/iv_more"
+                        android:layout_toLeftOf="@+id/iv_more"
+                        android:focusable="true"
+                        android:textColor="@color/colorGray_5"
+                        android:visibility="visible"
+                        android:text="@string/more"
+                        android:textSize="@dimen/text_size_small" />
+
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/iv_more"
+                        android:tint="@color/colorGray_5"
+                        android:scaleType="centerInside"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/svg_arrow_right" />
+            </RelativeLayout>
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/relative_layout"
             android:id="@+id/rv_book_cell_item"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/tv_more_cell_item"
-            app:layout_constraintStart_toStartOf="@id/iv_icon_cell_item"
-            app:layout_constraintTop_toBottomOf="@id/iv_icon_cell_item" />
+            android:layout_marginBottom="5dp" />
 
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

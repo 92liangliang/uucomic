@@ -8,7 +8,7 @@ import android.text.TextUtils;
 public class ApiConstant {
 
     public static String UU_API_URL = "http://app.mmw76.com/";
-    public static String UU_BASE_URL = "http://mmw76.com/";
+    public static String UU_BASE_URL = "https://qqr35.com/";
     public static String UU_IMG_URL = "http://krv76.com/";
 
     public static String getFormatUrl(String url) {

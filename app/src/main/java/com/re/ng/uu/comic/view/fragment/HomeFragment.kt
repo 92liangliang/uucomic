@@ -1,7 +1,6 @@
 package com.re.ng.uu.comic.view.fragment
 
 import android.content.Context
-import android.graphics.ColorMatrixColorFilter
 import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.rdc.bms.easy_rv_adapter.base.RvSimpleAdapter
@@ -19,7 +19,6 @@ import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.*
 import com.re.ng.uu.comic.listener.OnScrollYChangeForAlphaListener
-import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.ScreenUtil
 import com.re.ng.uu.comic.util.StartActUtil
 import com.youth.banner.BannerConfig
@@ -79,6 +78,12 @@ class HomeFragment : BaseLazyFragment() {
         iv_search_fragment_home.setOnClickListener {
             StartActUtil.toSearchAct(context)
         }
+        iv_time.setOnClickListener {
+            showToast("todo")
+        }
+        iv_time.setOnClickListener {
+            showToast("todo")
+        }
     }
 
     /**
@@ -91,28 +96,29 @@ class HomeFragment : BaseLazyFragment() {
         cl_top_fragment_home.getBackground().mutate().setAlpha(alpha)
         val scale = alpha / 255f
         //白->红
-        iv_search_fragment_home.setColorFilter(
-            ColorMatrixColorFilter(
-                floatArrayOf(
-                    0f, 0f, 0f, 0f,
-                    255 - scale * 12,
-                    0f, 0f, 0f, 0f,
-                    255 - scale * 153,
-                    0f, 0f, 0f, 0f,
-                    255 - scale * 172,
-                    0f, 0f, 0f, 1f, 0f
-                )
-            )
-        )
-        LogUtil.e("scal=" + scale)
+//        iv_search_fragment_home.setColorFilter(
+//            ColorMatrixColorFilter(
+//                floatArrayOf(
+//                    0f, 0f, 0f, 0f,
+//                    255 - scale * 12,
+//                    0f, 0f, 0f, 0f,
+//                    255 - scale * 153,
+//                    0f, 0f, 0f, 0f,
+//                    255 - scale * 172,
+//                    0f, 0f, 0f, 1f, 0f
+//                )
+//            )
+//        )
         if (scale < 0.2) {
+            iv_search_fragment_home.setImageDrawable(getResources().getDrawable(R.mipmap.svg_white_nav_bar_search))
             tv_title_fragment_home.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.colorWhite
+                    R.color.colorGray_9
                 )
             )
         } else if (scale > 0.2 && scale < 0.7) {
+            iv_search_fragment_home.setImageDrawable(getResources().getDrawable(R.mipmap.svg_white_nav_bar_search))
             tv_title_fragment_home.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -120,6 +126,7 @@ class HomeFragment : BaseLazyFragment() {
                 )
             )
         } else {
+            iv_search_fragment_home.setImageDrawable(getResources().getDrawable(R.mipmap.svg_red_nav_bar_search))
             tv_title_fragment_home.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -215,15 +222,11 @@ class HomeFragment : BaseLazyFragment() {
      * @param itemBeanList
      */
     private fun addAllComicItem(bean: ItemBean) {
-        val rootView =
-            LayoutInflater.from(mBaseActivity).inflate(R.layout.cell_item, null)
-        val ivIcon =
-            rootView.findViewById<ImageView>(R.id.iv_icon_cell_item)
-        val tvTitle =
-            rootView.findViewById<TextView>(R.id.tv_title_cell_item)
-        val tvIntro =
-            rootView.findViewById<TextView>(R.id.tv_intro_cell_item)
-        val tvMore = rootView.findViewById<TextView>(R.id.tv_more_cell_item)
+        val rootView = LayoutInflater.from(mBaseActivity).inflate(R.layout.cell_item, null)
+        val ivIcon = rootView.findViewById<ImageView>(R.id.iv_icon_cell_item)
+        val tvTitle = rootView.findViewById<TextView>(R.id.tv_title_cell_item)
+        val tvIntro = rootView.findViewById<TextView>(R.id.tv_intro_cell_item)
+        val tvMore = rootView.findViewById<RelativeLayout>(R.id.relative_layout_mode)
         val rvComicList: RecyclerView = rootView.findViewById(R.id.rv_book_cell_item)
         Glide.with(mBaseActivity).load(bean.iconResId).into(ivIcon)
         tvTitle.setText(bean.getTitle())
@@ -238,6 +241,9 @@ class HomeFragment : BaseLazyFragment() {
         rvSimpleAdapter.addAll(bean.getComicCellList { comicId ->
             StartActUtil.toBookDetail(mBaseActivity, comicId)
         })
+        tvMore.setOnClickListener {
+
+        }
         //添加进布局
         ll_item_container.addView(rootView)
     }

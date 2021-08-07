@@ -22,60 +22,103 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                    android:id="@+id/iv_bg_search_fragment_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginEnd="10dp"
-                    android:padding="7dp"
-                    android:src="@drawable/black_oval_bg" />
-
-            <ImageView
-                    android:id="@+id/iv_search_fragment_home"
+                    android:id="@+id/app_logo"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:padding="13dp"
+                    android:padding="7dp"
                     android:clickable="true"
+                    android:scaleType="centerInside"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/svg_white_nav_bar_search"
+                    android:src="@drawable/ic_launcher"
                     android:focusable="true" />
 
-            <!--            <ImageView-->
-            <!--                    android:id="@+id/iv_bg_left_fragment_home"-->
-            <!--                    android:layout_width="45dp"-->
-            <!--                    android:layout_height="45dp"-->
-            <!--                    android:layout_marginStart="10dp"-->
-            <!--                    android:padding="7dp"-->
-            <!--                    android:visibility="invisible"-->
-            <!--                    android:src="@drawable/black_oval_bg"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+            <RelativeLayout
+                    android:layout_toStartOf="@+id/iv_time"
+                    android:layout_toLeftOf="@+id/iv_time"
+                    android:layout_toRightOf="@+id/app_logo"
+                    android:layout_toEndOf="@+id/app_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <!--            <ImageView-->
-            <!--                    android:id="@+id/iv_left_fragment_home"-->
-            <!--                    android:layout_width="45dp"-->
-            <!--                    android:layout_height="45dp"-->
-            <!--                    android:clickable="true"-->
-            <!--                    android:focusable="true"-->
-            <!--                    android:padding="11dp"-->
-            <!--                    android:visibility="invisible"-->
-            <!--                    android:src="@mipmap/pic_main_boy"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="@id/iv_bg_left_fragment_home"-->
-            <!--                    app:layout_constraintEnd_toEndOf="@id/iv_bg_left_fragment_home"-->
-            <!--                    app:layout_constraintStart_toStartOf="@id/iv_bg_left_fragment_home"-->
-            <!--                    app:layout_constraintTop_toTopOf="@id/iv_bg_left_fragment_home" />-->
+                <ImageView
+                        android:id="@+id/iv_bg_search_fragment_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:padding="7dp"
+                        android:src="@drawable/black_oval_bg" />
 
-            <TextView
-                    android:id="@+id/tv_title_fragment_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_centerHorizontal="true"
+                <ImageView
+                        android:id="@+id/iv_search_fragment_home"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="13dp"
+                        android:clickable="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/svg_white_nav_bar_search"
+                        android:focusable="true" />
+
+                <!--            <ImageView-->
+                <!--                    android:id="@+id/iv_bg_left_fragment_home"-->
+                <!--                    android:layout_width="45dp"-->
+                <!--                    android:layout_height="45dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:padding="7dp"-->
+                <!--                    android:visibility="invisible"-->
+                <!--                    android:src="@drawable/black_oval_bg"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+                <!--            <ImageView-->
+                <!--                    android:id="@+id/iv_left_fragment_home"-->
+                <!--                    android:layout_width="45dp"-->
+                <!--                    android:layout_height="45dp"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:focusable="true"-->
+                <!--                    android:padding="11dp"-->
+                <!--                    android:visibility="invisible"-->
+                <!--                    android:src="@mipmap/pic_main_boy"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/iv_bg_left_fragment_home"-->
+                <!--                    app:layout_constraintEnd_toEndOf="@id/iv_bg_left_fragment_home"-->
+                <!--                    app:layout_constraintStart_toStartOf="@id/iv_bg_left_fragment_home"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/iv_bg_left_fragment_home" />-->
+
+                <TextView
+                        android:id="@+id/tv_title_fragment_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/search"
+                        android:textColor="@color/colorGray_9"
+                        android:textSize="15sp" />
+            </RelativeLayout>
+
+            <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/iv_raking"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="7dp"
+                    android:clickable="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/search"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15sp" />
+                    android:src="@drawable/icon_ranking"
+                    android:focusable="true" />
+
+            <ImageView
+                    android:layout_toLeftOf="@+id/iv_raking"
+                    android:layout_toStartOf="@+id/iv_raking"
+                    android:id="@+id/iv_time"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="7dp"
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_time"
+                    android:focusable="true" />
 
         </RelativeLayout>
 
