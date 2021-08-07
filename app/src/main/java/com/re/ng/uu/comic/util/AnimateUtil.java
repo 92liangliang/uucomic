@@ -10,10 +10,14 @@ public class AnimateUtil {
      * @param view
      * @param isLike 目前的状态（没点击前）
      */
-    public static void likeAnimate(final ImageView view, boolean isLike) {
+    public static void likeAnimate(final ImageView view, boolean isLike, boolean isFullView) {
         if (isLike){
             //取消喜欢
-            view.setImageResource(R.drawable.svg_red_like_normal);
+            if(isFullView) {
+                view.setImageResource(R.drawable.svg_white_normal_like);
+            }else {
+                view.setImageResource(R.drawable.svg_red_like_normal);
+            }
         }else {
             //喜欢
             view.setImageResource(R.drawable.svg_red_like_pressed);

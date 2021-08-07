@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.rdc.bms.easy_rv_adapter.base.RvSimpleAdapter
 import com.re.ng.uu.comic.R
 import com.re.ng.uu.comic.base.BaseLazyFragment
-import com.re.ng.uu.comic.config.Constant
 import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.*
@@ -41,18 +40,18 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     fun setListener() {
-        ll_book_bill_fragment_home.setOnClickListener(View.OnClickListener {
-            StartActUtil.toBookBillAct(
-                mBaseActivity,
-                Constant.TYPE_BOOK_BILL
-            )
-        })
-        ll_rank_fragment_home.setOnClickListener(View.OnClickListener {
-            StartActUtil.toBookBillAct(
-                mBaseActivity,
-                Constant.TYPE_RANK
-            )
-        })
+//        ll_book_bill_fragment_home.setOnClickListener(View.OnClickListener {
+//            StartActUtil.toBookBillAct(
+//                mBaseActivity,
+//                Constant.TYPE_BOOK_BILL
+//            )
+//        })
+//        ll_rank_fragment_home.setOnClickListener(View.OnClickListener {
+//            StartActUtil.toBookBillAct(
+//                mBaseActivity,
+//                Constant.TYPE_RANK
+//            )
+//        })
         iv_bg_search_fragment_home.setOnClickListener(View.OnClickListener {
             StartActUtil.toSearchAct(
                 mBaseActivity

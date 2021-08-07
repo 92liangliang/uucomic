@@ -33,7 +33,7 @@ class TagFragment : BaseLazyAbsFragment() {
     }
 
     override fun onLoadMore() {
-        page ++
+        page++
         getTagBooks()
     }
 
@@ -43,16 +43,16 @@ class TagFragment : BaseLazyAbsFragment() {
         getTagBooks()
     }
 
-    private fun getTagBooks(){
+    private fun getTagBooks() {
         UUClient.sub(UUClient.getDefault().tagBooks(bookTag, page, pageSize),
             object : SimpleObserver<BookList>(mRefreshLayout) {
-            override fun onNext(result: BookList) {
-                super.onNext(result)
-                if(result.books != null){
-                    setSearchResult(result.books)
+                override fun onNext(result: BookList) {
+                    super.onNext(result)
+                    if (result.books != null) {
+                        setSearchResult(result.books)
+                    }
                 }
-            }
-        } )
+            })
     }
 
     fun setSearchResult(list: List<BookBean>) {

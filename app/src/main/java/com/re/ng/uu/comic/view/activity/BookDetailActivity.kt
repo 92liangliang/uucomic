@@ -71,9 +71,11 @@ class BookDetailActivity : BaseActivity() {
     private var mBookBean: BookBean? = null
     private var mFList: ArrayList<BaseLazyFragment> = ArrayList()
     private var isCollected = false
+    private var isFullView = true
     private val mTitles = arrayOf("详情", "目录", "评论")
     private var mRecentReadChapter: ChapterBean? = null //最近阅读的一话
     private var mFirstChapterBean: ChapterBean? = null //第一话
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,10 +122,10 @@ class BookDetailActivity : BaseActivity() {
         mTopLayout.setBackgroundResource(R.color.transparent)
         mIvCollect.visibility = View.VISIBLE
         mIvBack.setImageResource(R.drawable.svg_white_nav_bar_back)
-        mIvCollect.setImageResource(R.drawable.svg_white_nav_bar_love)
         setSupportActionBar(mToolbar)
         mAppBarLayout.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (verticalOffset <= -mHeaderLayout.height / 2) {
+                isFullView = false
                 mCollapsingToolbarLayout.title = ""
                 setStatusTextColor(true)
                 mIvBack.setImageResource(R.mipmap.svg_red_nav_bar_back)
@@ -132,8 +134,9 @@ class BookDetailActivity : BaseActivity() {
             } else {
                 mCollapsingToolbarLayout.title = ""
                 setStatusTextColor(false)
+                isFullView = true
                 mIvBack.setImageResource(R.drawable.svg_white_nav_bar_back)
-                mIvCollect.setImageResource(if (isCollected) R.drawable.svg_white_pressed_like else R.drawable.svg_white_normal_like)
+                mIvCollect.setImageResource(if (isCollected) R.drawable.svg_red_pressed_like else R.drawable.svg_white_normal_like)
                 mTvTitle.visibility = View.INVISIBLE
             }
         })
@@ -159,7 +162,7 @@ class BookDetailActivity : BaseActivity() {
             if (!APP.getInstance().checkLogin(this)) {
                 return@setOnClickListener
             }
-            AnimateUtil.likeAnimate(mIvCollect, isCollected)
+            AnimateUtil.likeAnimate(mIvCollect, isCollected, isFullView)
             if (isCollected) {
                 showToast("已取消收藏！")
             } else {
@@ -230,14 +233,16 @@ class BookDetailActivity : BaseActivity() {
     }
 
     private fun getBookDetail() {
-        UUClient.sub(UUClient.getDefault().bookDetail(mBookId), object : SimpleObserver<BookDetail>() {
-            override fun onNext(result: BookDetail) {
-                super.onNext(result)
-                if (result.isSuccess) {
-                    setBookDetailInfo(result.book)
+        UUClient.sub(
+            UUClient.getDefault().bookDetail(mBookId),
+            object : SimpleObserver<BookDetail>() {
+                override fun onNext(result: BookDetail) {
+                    super.onNext(result)
+                    if (result.isSuccess) {
+                        setBookDetailInfo(result.book)
+                    }
                 }
-            }
-        })
+            })
     }
 
     private fun getComments() {
@@ -256,7 +261,10 @@ class BookDetailActivity : BaseActivity() {
                 super.onNext(result)
                 if (result.isSuccess) {
                     isCollected = result.isfavor == 1
-                    mIvCollect.setImageResource(if (isCollected) R.drawable.svg_red_pressed_like else R.drawable.svg_red_like_normal)
+                    mIvCollect.setImageResource(
+                        if (isCollected) R.drawable.svg_red_pressed_like else
+                            if (isFullView) R.drawable.svg_white_normal_like else R.drawable.svg_red_like_normal
+                    )
                 }
             }
         })
