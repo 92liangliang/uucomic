@@ -20,6 +20,7 @@ import com.re.ng.uu.comic.http.bean.RecommendBooks;
 import com.re.ng.uu.comic.http.bean.SearchBean;
 import com.re.ng.uu.comic.http.bean.TypeList;
 import com.re.ng.uu.comic.http.bean.mostChargedBooks;
+import com.re.ng.uu.comic.http.bean.updateBooks;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -34,22 +35,26 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("books/getNewest")
-    Observable<NewestBooks> newestBooks(@Query("num") String num);
+    Observable<NewestBooks> newestBooks();
 
     @GET("books/getmostcharged")
-    Observable<mostChargedBooks> mostCharged(@Query("num") String num);
+    Observable<mostChargedBooks> mostCharged();
 
     @GET("books/getEnds")
-    Observable<EndBooks> endBooks(@Query("num") String num);
+    Observable<EndBooks> endBooks();
 
     @GET("books/getTops")
     Observable<BaseBean> recommendBooks();
 
     @GET("books/getHot")
-    Observable<HotBooks> hotBooks(@Query("num") String num);
+    Observable<HotBooks> hotBooks();
 
     @GET("books/getupdate")
     Observable<BaseBean> updateBooks();
+
+    @GET("getUpdate")
+    Observable<updateBooks> getUpdate(@Query("page") String page,
+                                      @Query("date") String date);
 
     @GET("books/search")
     Observable<SearchBean> search(@Query("keyword") String keyword);

@@ -40,6 +40,10 @@ public class UUClient {
         return bind(ApiConstant.UU_API_URL).create(ApiService.class);
     }
 
+    public static ApiService getDefault2() {
+        return bind(ApiConstant.UU_API_URL2).create(ApiService.class);
+    }
+
     public static <T> void sub(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

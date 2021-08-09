@@ -51,6 +51,10 @@ public class CollectFragment extends BaseBookShelfTabFragment {
         isLoaded = true;
         getCollectData();
 
+        for(int a=0;a<7;a++){
+
+        }
+
     }
 
     public interface OnClickListener {

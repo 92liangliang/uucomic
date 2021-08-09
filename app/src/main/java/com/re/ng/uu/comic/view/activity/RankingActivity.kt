@@ -151,7 +151,7 @@ class RankingActivity : BaseActivity() {
     private fun getNew() {
         showLoadingDialog()
         mHistoryAdapter.clear()
-        UUClient.sub(UUClient.getDefault().newestBooks("100"),
+        UUClient.sub(UUClient.getDefault().newestBooks(),
             object : SimpleObserver<NewestBooks>(dialog) {
                 override fun onNext(result: NewestBooks) {
                     super.onNext(result)
@@ -170,7 +170,7 @@ class RankingActivity : BaseActivity() {
     private fun getHottest() {
         showLoadingDialog()
         mHistoryAdapter.clear()
-        UUClient.sub(UUClient.getDefault().hotBooks("100"),
+        UUClient.sub(UUClient.getDefault().hotBooks(),
             object : SimpleObserver<HotBooks>(dialog) {
                 override fun onNext(result: HotBooks) {
                     super.onNext(result)
@@ -189,7 +189,7 @@ class RankingActivity : BaseActivity() {
     private fun getEndBooks() {
         showLoadingDialog()
         mHistoryAdapter.clear()
-        UUClient.sub(UUClient.getDefault().endBooks("100"),
+        UUClient.sub(UUClient.getDefault().endBooks(),
             object : SimpleObserver<EndBooks>(dialog) {
                 override fun onNext(result: EndBooks) {
                     super.onNext(result)
@@ -208,7 +208,7 @@ class RankingActivity : BaseActivity() {
     private fun mostCharged() {
         showLoadingDialog()
         mHistoryAdapter.clear()
-        UUClient.sub(UUClient.getDefault().mostCharged("100"),
+        UUClient.sub(UUClient.getDefault().mostCharged(),
             object : SimpleObserver<mostChargedBooks>(dialog) {
                 override fun onNext(result: mostChargedBooks) {
                     super.onNext(result)

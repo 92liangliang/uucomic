@@ -19,6 +19,7 @@ import com.re.ng.uu.comic.view.activity.RegisterActivity;
 import com.re.ng.uu.comic.view.activity.SearchActivity;
 import com.re.ng.uu.comic.view.activity.SearchResultActivity;
 import com.re.ng.uu.comic.view.activity.TagBooksActivity;
+import com.re.ng.uu.comic.view.activity.TimeActivity;
 
 import java.util.ArrayList;
 
@@ -36,12 +37,12 @@ public class StartActUtil {
 
     public static void toBookDetail(Context context, String bookId) {
         Intent intent = new Intent(context, BookDetailActivity.class);
-        intent.putExtra("bookId",bookId);
+        intent.putExtra("bookId", bookId);
         context.startActivity(intent);
     }
 
     public static void toSearchAct(Context context) {
-        context.startActivity(new Intent(context,SearchActivity.class));
+        context.startActivity(new Intent(context, SearchActivity.class));
     }
 
     public static void toMainAct(Context context) {
@@ -66,25 +67,30 @@ public class StartActUtil {
         context.startActivity(intent);
     }
 
+    public static void toTimeAct(Context context) {
+        Intent intent = new Intent(context, TimeActivity.class);
+        context.startActivity(intent);
+    }
+
     public static void toSearchResultAct(Context context, String title, String key, String type) {
-        Intent intent = new Intent(context,SearchResultActivity.class);
-        intent.putExtra("title",title);
-        intent.putExtra("key",key);
-        intent.putExtra("type",type);
+        Intent intent = new Intent(context, SearchResultActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("key", key);
+        intent.putExtra("type", type);
         context.startActivity(intent);
     }
 
     public static void toMoreAct(Context context, String title, String type) {
         Intent intent = new Intent(context, MoreActivity.class);
-        intent.putExtra("title",title);
-        intent.putExtra("type",type);
+        intent.putExtra("title", title);
+        intent.putExtra("type", type);
         context.startActivity(intent);
     }
 
     public static void toSearchResultAct(Context context, String title, String type) {
-        Intent intent = new Intent(context,SearchResultActivity.class);
-        intent.putExtra("title",title);
-        intent.putExtra("type",type);
+        Intent intent = new Intent(context, SearchResultActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("type", type);
         context.startActivity(intent);
     }
 
@@ -95,61 +101,61 @@ public class StartActUtil {
         context.startActivity(intent);
     }
 
-    public static void toRegister(Context context){
+    public static void toRegister(Context context) {
         Intent intent = new Intent(context, RegisterActivity.class);
         context.startActivity(intent);
     }
 
-    public static void toLogin(Context context){
+    public static void toLogin(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
-    public static void toResetPwd(Context context){
+    public static void toResetPwd(Context context) {
         Intent intent = new Intent(context, ForgetPwdActivity.class);
         context.startActivity(intent);
     }
 
-    public static void toLogin(Context context, String username, String password){
+    public static void toLogin(Context context, String username, String password) {
         Intent intent = new Intent(context, TagBooksActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("password", password);
         context.startActivity(intent);
     }
 
-    public static void toRecharge(Context context){
-        if(APP.getInstance().isUserLogin()){
+    public static void toRecharge(Context context) {
+        if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, RechargeActivity.class);
             context.startActivity(intent);
-        }else {
-            if(context instanceof BaseActivity){
-                ((BaseActivity)context).showToast("请先登录");
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
             }
             toLogin(context);
         }
     }
 
-    public static void toGetVIP(Context context){
-        if(APP.getInstance().isUserLogin()){
+    public static void toGetVIP(Context context) {
+        if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, OpenVipActivity.class);
             context.startActivity(intent);
-        }else {
-            if(context instanceof BaseActivity){
-                ((BaseActivity)context).showToast("请先登录");
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
             }
             toLogin(context);
         }
     }
 
-    public static void toOrderHistory(Context context, String type, String title){
-        if(APP.getInstance().isUserLogin()){
+    public static void toOrderHistory(Context context, String type, String title) {
+        if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, OrderHistoryActivity.class);
             intent.putExtra("type", type);
             intent.putExtra("title", title);
             context.startActivity(intent);
-        }else {
-            if(context instanceof BaseActivity){
-                ((BaseActivity)context).showToast("请先登录");
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
             }
             toLogin(context);
         }

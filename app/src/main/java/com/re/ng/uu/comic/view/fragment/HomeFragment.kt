@@ -83,7 +83,9 @@ class HomeFragment : BaseLazyFragment() {
             )
         }
         iv_time.setOnClickListener {
-            showToast("todo")
+            StartActUtil.toTimeAct(
+                mBaseActivity
+            )
         }
     }
 
@@ -150,7 +152,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getNewest() {
-        UUClient.sub(UUClient.getDefault().newestBooks("20"),
+        UUClient.sub(UUClient.getDefault().newestBooks(),
             object : SimpleObserver<NewestBooks>(refreshLayout_fragment_home) {
                 override fun onNext(result: NewestBooks) {
                     super.onNext(result)
@@ -168,7 +170,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getHottest() {
-        UUClient.sub(UUClient.getDefault().hotBooks("20"),
+        UUClient.sub(UUClient.getDefault().hotBooks(),
             object : SimpleObserver<HotBooks>(refreshLayout_fragment_home) {
                 override fun onNext(result: HotBooks) {
                     super.onNext(result)
@@ -185,7 +187,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getEndBooks() {
-        UUClient.sub(UUClient.getDefault().endBooks("20"), object : SimpleObserver<EndBooks>() {
+        UUClient.sub(UUClient.getDefault().endBooks(), object : SimpleObserver<EndBooks>() {
             override fun onNext(result: EndBooks) {
                 super.onNext(result)
                 if (result.ends != null) {

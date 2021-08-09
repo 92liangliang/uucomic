@@ -20,6 +20,8 @@ data class RecommendBooks(val recommends: List<BookBean>) : BaseBean()
 
 data class HotBooks(val hots: List<BookBean>) : BaseBean()
 
+data class updateBooks(val books: List<BookBean>) : BaseBean()
+
 data class mostChargedBooks(val most: List<BookBean>) : BaseBean()
 
 data class BookDetail(val book: BookBean) : BaseBean()

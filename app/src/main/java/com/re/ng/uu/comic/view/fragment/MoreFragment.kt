@@ -64,7 +64,7 @@ public class MoreFragment : BaseAbsFragment() {
 
     private fun getNewest() {
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().newestBooks("20"),
+        UUClient.sub(UUClient.getDefault().newestBooks(),
             object : SimpleObserver<NewestBooks>(mDialog) {
                 override fun onNext(result: NewestBooks) {
                     super.onNext(result)
@@ -78,7 +78,7 @@ public class MoreFragment : BaseAbsFragment() {
 
     private fun getHottest() {
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().hotBooks("20"),
+        UUClient.sub(UUClient.getDefault().hotBooks(),
             object : SimpleObserver<HotBooks>(mDialog) {
                 override fun onNext(result: HotBooks) {
                     super.onNext(result)
@@ -91,7 +91,7 @@ public class MoreFragment : BaseAbsFragment() {
 
     private fun getEndBooks() {
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().endBooks("20"),
+        UUClient.sub(UUClient.getDefault().endBooks(),
             object : SimpleObserver<EndBooks>(mDialog) {
                 override fun onNext(result: EndBooks) {
                     super.onNext(result)

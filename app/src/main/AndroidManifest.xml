@@ -20,6 +20,7 @@
         <activity android:name=".view.activity.RankingActivity" />
         <activity android:name=".view.activity.SearchResultActivity" />
         <activity android:name=".view.activity.MoreActivity" />
+        <activity android:name=".view.activity.TimeActivity" />
         <activity android:name=".view.activity.SearchActivity" />
         <activity android:name=".view.activity.RechargeActivity" />
         <activity android:name=".view.activity.SplashActivity">
