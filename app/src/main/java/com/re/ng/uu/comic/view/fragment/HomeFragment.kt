@@ -243,7 +243,7 @@ class HomeFragment : BaseLazyFragment() {
             StartActUtil.toBookDetail(mBaseActivity, comicId)
         })
         tvMore.setOnClickListener {
-            showToast("todo")
+            StartActUtil.toMoreAct(mBaseActivity, bean.title, bean.title)
         }
         //添加进布局
         ll_item_container.addView(rootView)

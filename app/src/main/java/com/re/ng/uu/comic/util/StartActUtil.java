@@ -10,6 +10,7 @@ import com.re.ng.uu.comic.view.activity.ComicActivity;
 import com.re.ng.uu.comic.view.activity.ForgetPwdActivity;
 import com.re.ng.uu.comic.view.activity.LoginActivity;
 import com.re.ng.uu.comic.view.activity.MainActivity;
+import com.re.ng.uu.comic.view.activity.MoreActivity;
 import com.re.ng.uu.comic.view.activity.OpenVipActivity;
 import com.re.ng.uu.comic.view.activity.OrderHistoryActivity;
 import com.re.ng.uu.comic.view.activity.RankingActivity;
@@ -69,6 +70,13 @@ public class StartActUtil {
         Intent intent = new Intent(context,SearchResultActivity.class);
         intent.putExtra("title",title);
         intent.putExtra("key",key);
+        intent.putExtra("type",type);
+        context.startActivity(intent);
+    }
+
+    public static void toMoreAct(Context context, String title, String type) {
+        Intent intent = new Intent(context, MoreActivity.class);
+        intent.putExtra("title",title);
         intent.putExtra("type",type);
         context.startActivity(intent);
     }
