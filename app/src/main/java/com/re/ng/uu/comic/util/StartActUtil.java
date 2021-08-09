@@ -12,6 +12,7 @@ import com.re.ng.uu.comic.view.activity.LoginActivity;
 import com.re.ng.uu.comic.view.activity.MainActivity;
 import com.re.ng.uu.comic.view.activity.OpenVipActivity;
 import com.re.ng.uu.comic.view.activity.OrderHistoryActivity;
+import com.re.ng.uu.comic.view.activity.RankingActivity;
 import com.re.ng.uu.comic.view.activity.RechargeActivity;
 import com.re.ng.uu.comic.view.activity.RegisterActivity;
 import com.re.ng.uu.comic.view.activity.SearchActivity;
@@ -57,6 +58,11 @@ public class StartActUtil {
 //        Intent intent = new Intent(context,BookBillActivity.class);
 //        intent.putExtra("type",type);
 //        context.startActivity(intent);
+    }
+
+    public static void toRankingAct(Context context) {
+        Intent intent = new Intent(context, RankingActivity.class);
+        context.startActivity(intent);
     }
 
     public static void toSearchResultAct(Context context, String title, String key, String type) {

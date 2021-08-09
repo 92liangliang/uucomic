@@ -19,6 +19,7 @@ import com.re.ng.uu.comic.http.bean.PayResult;
 import com.re.ng.uu.comic.http.bean.RecommendBooks;
 import com.re.ng.uu.comic.http.bean.SearchBean;
 import com.re.ng.uu.comic.http.bean.TypeList;
+import com.re.ng.uu.comic.http.bean.mostChargedBooks;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -33,19 +34,19 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("books/getNewest")
-    Observable<NewestBooks> newestBooks();
+    Observable<NewestBooks> newestBooks(@Query("num") String num);
 
     @GET("books/getmostcharged")
-    Observable<BaseBean> mostCharged();
+    Observable<mostChargedBooks> mostCharged(@Query("num") String num);
 
     @GET("books/getEnds")
-    Observable<EndBooks> endBooks();
+    Observable<EndBooks> endBooks(@Query("num") String num);
 
     @GET("books/getTops")
     Observable<BaseBean> recommendBooks();
 
     @GET("books/getHot")
-    Observable<HotBooks> hotBooks();
+    Observable<HotBooks> hotBooks(@Query("num") String num);
 
     @GET("books/getupdate")
     Observable<BaseBean> updateBooks();

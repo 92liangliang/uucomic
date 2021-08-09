@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:id="@+id/linear_layout_new"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_new_ranking"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/new_ranking"
+                    android:layout_height="wrap_content" />
+
+            <View
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/v_new_ranking"
+                    android:background="@drawable/shape_red"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linear_layout_hot"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:id="@+id/tv_hot"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/hot_ranking"
+                    android:layout_height="wrap_content" />
+
+            <View
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/v_hot_ranking"
+                    android:background="@drawable/shape_red"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linear_layout_full"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:id="@+id/tv_full_ranking"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/full_ranking"
+                    android:layout_height="wrap_content" />
+
+            <View
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/v_full_ranking"
+                    android:background="@drawable/shape_red"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linear_layout_topup"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:id="@+id/tv_topup_ranking"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/topup_ranking"
+                    android:layout_height="wrap_content" />
+
+            <View
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/v_topup_ranking"
+                    android:background="@drawable/shape_red"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlAccentColor="#F36653"
+                android:overScrollMode="never"
+                app:srlEnablePreviewInEditMode="true">
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:overScrollMode="never"
+                    android:background="#ffffff" />
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

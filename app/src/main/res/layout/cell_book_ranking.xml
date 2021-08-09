@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="100dp">
+
+    <android.support.v7.widget.CardView
+            android:id="@+id/cv_cell_book_home"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp">
+
+        <ImageView
+                android:id="@+id/iv_cover_cell_book_home"
+                android:layout_width="match_parent"
+                tools:src="@drawable/shape_red"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+            android:layout_toEndOf="@+id/cv_cell_book_home"
+            android:layout_toRightOf="@+id/cv_cell_book_home"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/tv_name_cell_book_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="一天" />
+
+        <TextView
+                android:layout_below="@+id/tv_name_cell_book_home"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/tv_summary_cell_book_home"
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_size_normal"
+                tools:text="穿越千年回老本行" />
+
+    </RelativeLayout>
+</RelativeLayout>

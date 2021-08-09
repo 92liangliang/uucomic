@@ -77,8 +77,10 @@ class HomeFragment : BaseLazyFragment() {
         iv_search_fragment_home.setOnClickListener {
             StartActUtil.toSearchAct(context)
         }
-        iv_time.setOnClickListener {
-            showToast("todo")
+        iv_raking.setOnClickListener {
+            StartActUtil.toRankingAct(
+                mBaseActivity
+            )
         }
         iv_time.setOnClickListener {
             showToast("todo")
@@ -148,7 +150,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getNewest() {
-        UUClient.sub(UUClient.getDefault().newestBooks(),
+        UUClient.sub(UUClient.getDefault().newestBooks("20"),
             object : SimpleObserver<NewestBooks>(refreshLayout_fragment_home) {
                 override fun onNext(result: NewestBooks) {
                     super.onNext(result)
@@ -166,7 +168,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getHottest() {
-        UUClient.sub(UUClient.getDefault().hotBooks(),
+        UUClient.sub(UUClient.getDefault().hotBooks("20"),
             object : SimpleObserver<HotBooks>(refreshLayout_fragment_home) {
                 override fun onNext(result: HotBooks) {
                     super.onNext(result)
@@ -183,7 +185,7 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getEndBooks() {
-        UUClient.sub(UUClient.getDefault().endBooks(), object : SimpleObserver<EndBooks>() {
+        UUClient.sub(UUClient.getDefault().endBooks("20"), object : SimpleObserver<EndBooks>() {
             override fun onNext(result: EndBooks) {
                 super.onNext(result)
                 if (result.ends != null) {
@@ -241,7 +243,7 @@ class HomeFragment : BaseLazyFragment() {
             StartActUtil.toBookDetail(mBaseActivity, comicId)
         })
         tvMore.setOnClickListener {
-
+            showToast("todo")
         }
         //添加进布局
         ll_item_container.addView(rootView)

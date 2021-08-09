@@ -20,13 +20,17 @@ data class RecommendBooks(val recommends: List<BookBean>) : BaseBean()
 
 data class HotBooks(val hots: List<BookBean>) : BaseBean()
 
+data class mostChargedBooks(val most: List<BookBean>) : BaseBean()
+
 data class BookDetail(val book: BookBean) : BaseBean()
 
 data class ChapterList(val chapters: List<ChapterBean>) : BaseBean()
 
-data class ChapterDetail(val chapter: ChapterBean,
-                         val chapters: List<ChapterBean>,
-                         val money: String) : BaseBean()
+data class ChapterDetail(
+    val chapter: ChapterBean,
+    val chapters: List<ChapterBean>,
+    val money: String
+) : BaseBean()
 
 data class LoginData(val userInfo: UserInfo) : BaseBean()
 
@@ -34,18 +38,20 @@ data class FavorInfo(val isfavor: Int) : BaseBean()
 
 data class FavorList(val favors: List<FavorBean>) : BaseBean()
 
-data class BannerData(val banners: List<BannerBean>): BaseBean()
+data class BannerData(val banners: List<BannerBean>) : BaseBean()
 
-data class SearchBean(val hot_search: List<String>,
-                      val books: List<BookBean>): BaseBean()
+data class SearchBean(
+    val hot_search: List<String>,
+    val books: List<BookBean>
+) : BaseBean()
 
-data class CommentData(val comments: List<CommentBean>): BaseBean()
+data class CommentData(val comments: List<CommentBean>) : BaseBean()
 
-data class PayResult(val balance: Int): BaseBean()
+data class PayResult(val balance: Int) : BaseBean()
 
-data class OrderData(val spendings: List<OrderBean>): BaseBean()
+data class OrderData(val spendings: List<OrderBean>) : BaseBean()
 
-data class ChargeHistoryData(val charges: List<OrderBean>): BaseBean()
+data class ChargeHistoryData(val charges: List<OrderBean>) : BaseBean()
 
 data class OrderBean(
     val create_time: String,
@@ -84,7 +90,7 @@ data class UserInfo(
     val uid: Int,
     val username: String,
     val utoken: String
-): LitePalSupport(){
+) : LitePalSupport() {
     var vip_expire_time: Int = 0
     var password: String? = null
 }
@@ -95,7 +101,7 @@ data class TypeBean(
     val tag_name: String
 )
 
-data class BookBean (
+data class BookBean(
     val area_id: Int,
     val author_id: Int,
     val author_name: String,
@@ -124,13 +130,13 @@ data class BookBean (
     val update_time: String,
     val start: Int,
     val area: Area,
-    var firstOpenLastChapterId : Long = 0,
-    var recentChapter : String? = null,
+    var firstOpenLastChapterId: Long = 0,
+    var recentChapter: String? = null,
     var recentChapterId: Long = 0,
-    var lastRecordChapter : String? = null,
-    var lastRecordChapterId : Long = 0,
-    var time: Date ?=null
-): LitePalSupport(){
+    var lastRecordChapter: String? = null,
+    var lastRecordChapterId: Long = 0,
+    var time: Date? = null
+) : LitePalSupport() {
 
     fun getPrimaryKey(): Long {
         return baseObjId
@@ -159,8 +165,10 @@ data class BannerBean(
     val update_time: String
 )
 
-data class RechargeMoney(val show: String,
-                         val month: Int,
-                         val value: Int,
-                         var isSelected: Boolean,
-                         var desc: String = "")
+data class RechargeMoney(
+    val show: String,
+    val month: Int,
+    val value: Int,
+    var isSelected: Boolean,
+    var desc: String = ""
+)
