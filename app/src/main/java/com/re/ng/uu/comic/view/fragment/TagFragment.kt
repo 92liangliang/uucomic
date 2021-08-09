@@ -17,7 +17,7 @@ import java.util.*
 class TagFragment : BaseLazyAbsFragment() {
 
     private var page = 0
-    private var pageSize = 10
+    private var pageSize = 12
     var bookTag = ""
 
     override fun initLayoutManger(): RecyclerView.LayoutManager? {

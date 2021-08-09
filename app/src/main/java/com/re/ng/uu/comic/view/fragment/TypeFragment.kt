@@ -38,10 +38,10 @@ class TypeFragment : BaseLazyFragment() {
     lateinit var tvFinish: TextView
     lateinit var refreshLayout: SmartRefreshLayout
     lateinit var mRvListResult: RecyclerView
-    var type: Int = 0
+    var type: Int = -1
     var bookTag: String = ""
     private var page = 0
-    private var pageSize = 10
+    private var pageSize = 100
     lateinit var mHistoryAdapter: RvSimpleAdapter
 
     override fun setLayoutResourceId(): Int {
@@ -85,7 +85,7 @@ class TypeFragment : BaseLazyFragment() {
             reloadClick(tvAll, llAll, false)
             reloadClick(tvSerialize, llSerialize, true)
             reloadClick(tvFinish, llFinish, false)
-            type = 0
+            type = 2
             reload()
         }
         llFinish.setOnClickListener {
@@ -181,7 +181,9 @@ class TypeFragment : BaseLazyFragment() {
 
     fun setSearchResult(list: List<BookBean>) {
         isLoaded = true
-        mHistoryAdapter.clear()
+        if(page==0) {
+            mHistoryAdapter.clear()
+        }
         val cellList: MutableList<BaseRvCell<*>> = java.util.ArrayList()
         for (bookBean in list) {
             val bookCell = BookCell(bookBean)
