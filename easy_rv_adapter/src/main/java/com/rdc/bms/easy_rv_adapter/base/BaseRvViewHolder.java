@@ -6,6 +6,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class BaseRvViewHolder extends RecyclerView.ViewHolder {
@@ -36,6 +37,10 @@ public class BaseRvViewHolder extends RecyclerView.ViewHolder {
     }
 
     public TextView getTextView(int resId){
+        return retrieveView(resId);
+    }
+
+    public LinearLayout getLinearLayout(int resId){
         return retrieveView(resId);
     }
 

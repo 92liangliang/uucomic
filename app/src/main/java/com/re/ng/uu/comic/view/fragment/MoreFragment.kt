@@ -104,7 +104,7 @@ public class MoreFragment : BaseAbsFragment() {
 
     private fun getTagBooks(tag: String) {
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().tagBooks(tag, 0, 10),
+        UUClient.sub(UUClient.getDefault().tagBooks(tag, 0, 20),
             object : SimpleObserver<BookList>(mDialog) {
                 override fun onNext(result: BookList) {
                     super.onNext(result)

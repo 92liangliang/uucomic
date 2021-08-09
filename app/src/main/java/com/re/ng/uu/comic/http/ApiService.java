@@ -64,6 +64,11 @@ public interface ApiService {
     Observable<BookList> tagBooks(@Query("tag") String tag,
                                   @Query("startItem") int page,
                                   @Query("pageSize") int pageSize);
+    @GET("tag/getBookList")
+    Observable<BookList> tagBooks(@Query("tag") String tag,
+                                  @Query("end") int end,
+                                  @Query("startItem") int page,
+                                  @Query("pageSize") int pageSize);
 
     @GET("books/detail")
     Observable<BookDetail> bookDetail(@Query("id") String id);

@@ -98,7 +98,8 @@ data class UserInfo(
 data class TypeBean(
     val cover_url: String,
     val id: Int,
-    val tag_name: String
+    val tag_name: String,
+    var click: Boolean
 )
 
 data class BookBean(

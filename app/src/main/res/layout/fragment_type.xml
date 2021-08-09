@@ -1,44 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/topLayoutHeight"
-        android:elevation="5dp"
-        android:background="@color/colorWhite"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tl_top_fragment_type"
-            android:layout_width="0dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tabIndicatorColor="@color/colorRed"
-            app:tabMode="scrollable"
-            app:tabTextAppearance="@style/TabLayoutStyle"
-            app:tabSelectedTextColor="@color/colorRed"
-            app:tabTextColor="@color/colorBlack">
-
-        </android.support.design.widget.TabLayout>
-
-    </android.support.constraint.ConstraintLayout>
-
-
-    <android.support.v4.view.ViewPager
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/vp_container_fragment_type"
-        android:overScrollMode="never">
+        android:orientation="vertical">
 
-    </android.support.v4.view.ViewPager>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorWhite">
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="分类"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+    </FrameLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/colorLine" />
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <RelativeLayout
+                    android:background="#ffffff"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="题材"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_normal" />
+
+                <android.support.v7.widget.RecyclerView
+                        android:layout_toEndOf="@+id/tv_title"
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        tools:itemCount="3"
+                        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        tools:listitem="@layout/cell_type" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="进度"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_normal" />
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:id="@+id/linear_layout_all"
+                        android:background="@drawable/shape_red"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:id="@+id/tv_all"
+                            android:textColor="@color/colorWhite"
+                            android:text="全部" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:id="@+id/linear_layout_serialize"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:id="@+id/tv_serialize"
+                            android:textColor="@color/colorBlack"
+                            android:text="连载中" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:id="@+id/linear_layout_finish"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:id="@+id/tv_finish"
+                            android:textColor="@color/colorBlack"
+                            android:text="已完结" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/refresh_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    app:srlAccentColor="#F36653"
+                    android:overScrollMode="never"
+                    app:srlEnablePreviewInEditMode="true">
+
+                <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/root_container_layout">
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_result"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:overScrollMode="never"
+                            android:background="#ffffff" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

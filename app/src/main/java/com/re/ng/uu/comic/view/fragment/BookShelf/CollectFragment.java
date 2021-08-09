@@ -21,6 +21,7 @@ import com.re.ng.uu.comic.http.bean.CollectVO;
 import com.re.ng.uu.comic.http.bean.EventMessage;
 import com.re.ng.uu.comic.http.bean.FavorBean;
 import com.re.ng.uu.comic.http.bean.FavorList;
+import com.re.ng.uu.comic.http.bean.TypeBean;
 import com.re.ng.uu.comic.http.bean.UserInfo;
 import com.re.ng.uu.comic.http.bean.rv_cell.CollectCell;
 import com.re.ng.uu.comic.util.LogUtil;
@@ -49,6 +50,11 @@ public class CollectFragment extends BaseBookShelfTabFragment {
         }
         isLoaded = true;
         getCollectData();
+
+    }
+
+    public interface OnClickListener {
+        void onClickItem(TypeBean type);
     }
 
     @Override
