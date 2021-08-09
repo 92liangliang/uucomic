@@ -1,5 +1,6 @@
 package com.re.ng.uu.comic.view.fragment
 
+import android.app.Dialog
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -18,11 +19,11 @@ import com.re.ng.uu.comic.http.bean.BookList
 import com.re.ng.uu.comic.http.bean.TypeBean
 import com.re.ng.uu.comic.http.bean.TypeList
 import com.re.ng.uu.comic.http.bean.rv_cell.BookCell
+import com.re.ng.uu.comic.util.DialogUtil
 import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.StartActUtil
 import com.re.ng.uu.comic.view.adapter.TypeAdapter
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.fragment_type.*
 
@@ -41,8 +42,9 @@ class TypeFragment : BaseLazyFragment() {
     var type: Int = -1
     var bookTag: String = ""
     private var page = 0
-    private var pageSize = 100
+    private var pageSize = 102
     lateinit var mHistoryAdapter: RvSimpleAdapter
+    private lateinit var mDialog: Dialog
 
     override fun setLayoutResourceId(): Int {
         return R.layout.fragment_type
@@ -53,6 +55,12 @@ class TypeFragment : BaseLazyFragment() {
             return
         }
         isLoaded = true
+    }
+
+    private fun showLoadingDialog() {
+        mDialog = DialogUtil.showProgressDialog(activity)
+        mDialog.setCancelable(true)
+        mDialog.show()
     }
 
     override fun initView() {
@@ -69,10 +77,10 @@ class TypeFragment : BaseLazyFragment() {
         refreshLayout.setOnRefreshListener(OnRefreshListener {
             reload()
         })
-        refreshLayout.setOnLoadMoreListener(OnLoadMoreListener {
-            page++
-            getTagBooks(bookTag)
-        })
+//        refreshLayout.setOnLoadMoreListener(OnLoadMoreListener {
+//            page++
+//            getTagBooks(bookTag)
+//        })
 
         llAll.setOnClickListener {
             reloadClick(tvAll, llAll, true)
@@ -133,10 +141,11 @@ class TypeFragment : BaseLazyFragment() {
         } else {
             tag = bookTag
         }
-        LogUtil.e("chceck tag="+tag)
-        LogUtil.e("chceck type="+type)
+        LogUtil.e("chceck tag=" + tag)
+        LogUtil.e("chceck type=" + type)
+        showLoadingDialog()
         UUClient.sub(UUClient.getDefault().tagBooks(tag, type, page, pageSize),
-            object : SimpleObserver<BookList>(refreshLayout) {
+            object : SimpleObserver<BookList>(mDialog) {
                 override fun onNext(result: BookList) {
                     super.onNext(result)
                     if (result.books != null) {
@@ -181,7 +190,7 @@ class TypeFragment : BaseLazyFragment() {
 
     fun setSearchResult(list: List<BookBean>) {
         isLoaded = true
-        if(page==0) {
+        if (page == 0) {
             mHistoryAdapter.clear()
         }
         val cellList: MutableList<BaseRvCell<*>> = java.util.ArrayList()
