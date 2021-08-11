@@ -9,6 +9,7 @@ import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.BaseBean
 import com.re.ng.uu.comic.http.bean.RechargeMoney
+import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.Util
 import com.re.ng.uu.comic.view.adapter.VipMoneyAdapter
 import kotlinx.android.synthetic.main.activity_open_vip.*
@@ -59,6 +60,11 @@ class OpenVipActivity : BaseActivity() {
                         showToast("支付成功，请重新登录后查看")
                         finish()
                     }
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    LogUtil.e("error==="+e.message)
                 }
             })
     }

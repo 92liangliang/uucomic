@@ -153,9 +153,10 @@ public class UUClient {
                     String token = md5("hahmh" + time);
                     urlBuilder.addEncodedQueryParameter("time", time);
                     urlBuilder.addEncodedQueryParameter("token", token);
-                    LogUtil.d(TAG, "url = " + url.url());
-                    LogUtil.d(TAG, "time = " + time);
-                    LogUtil.d(TAG, "token = " + token);
+                    LogUtil.d("AppLog", "url     = " + url.url());
+                    LogUtil.d("AppLog", "time    = " + time);
+                    LogUtil.d("AppLog", "token   = " + token);
+                    LogUtil.d("AppLog", "request = " + request);
                 }
                 // 将最终的url填充到request中
                 requestBuilder.url(urlBuilder.build());

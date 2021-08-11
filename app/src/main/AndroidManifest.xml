@@ -16,11 +16,15 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
         <activity android:name=".view.activity.OrderHistoryActivity" />
-        <activity android:name=".view.activity.OpenVipActivity"/>
+        <activity android:name=".view.activity.OpenVipActivity" />
         <activity android:name=".view.activity.RankingActivity" />
         <activity android:name=".view.activity.SearchResultActivity" />
         <activity android:name=".view.activity.MoreActivity" />
         <activity android:name=".view.activity.TimeActivity" />
+        <activity android:name=".view.activity.ShareActivity" />
+        <activity android:name=".view.activity.WalletActivity" />
+        <activity android:name=".view.activity.BindPhoneActivity" />
+        <activity android:name=".view.activity.ExChangerVipActivity" />
         <activity android:name=".view.activity.SearchActivity" />
         <activity android:name=".view.activity.RechargeActivity" />
         <activity android:name=".view.activity.SplashActivity">

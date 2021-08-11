@@ -5,9 +5,11 @@ import android.view.View
 import com.re.ng.uu.comic.APP
 import com.re.ng.uu.comic.R
 import com.re.ng.uu.comic.base.BaseLazyFragment
+import com.re.ng.uu.comic.http.bean.UserInfo
 import com.re.ng.uu.comic.util.DateUtil
 import com.re.ng.uu.comic.util.StartActUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.litepal.LitePal
 import java.util.*
 
 /**
@@ -36,6 +38,7 @@ class MineFragment : BaseLazyFragment() {
         if (APP.getInstance().isUserLogin) {
             ll_user_info.visibility = View.VISIBLE
             rl_to_login.visibility = View.GONE
+            ll_logout.visibility = View.VISIBLE
             var userInfo = APP.getInstance().userInfo
             if (TextUtils.isEmpty(userInfo.nick_name)) {
                 tv_username.text = "${userInfo.username}"
@@ -48,8 +51,20 @@ class MineFragment : BaseLazyFragment() {
             }
             tv_vip_time.text = "VIP: 剩余${days}天"
             tv_amount.text = "账户余额: ${userInfo.balance}元"
+            ll_bind_phone.setOnClickListener {
+                StartActUtil.toBindPhone(context)
+            }
+            ll_share.setOnClickListener {
+                StartActUtil.toShare(context)
+            }
+            ll_wallet.setOnClickListener {
+                StartActUtil.toWallet(context)
+            }
             ll_recharge.setOnClickListener {
                 StartActUtil.toRecharge(context)
+            }
+            ll_exchange_vip.setOnClickListener {
+                StartActUtil.toExchange(context)
             }
             ll_get_vip.setOnClickListener {
                 StartActUtil.toGetVIP(context)
@@ -57,28 +72,32 @@ class MineFragment : BaseLazyFragment() {
             ll_logout.setOnClickListener {
                 logout()
             }
-            ll_recharge_history.setOnClickListener {
-                StartActUtil.toOrderHistory(context, "recharge", "充值记录")
-            }
-            ll_order_history.setOnClickListener {
-                StartActUtil.toOrderHistory(context, "order", "消费记录")
-            }
+//            ll_recharge_history.setOnClickListener {
+//                StartActUtil.toOrderHistory(context, "recharge", "充值记录")
+//            }
+//            ll_order_history.setOnClickListener {
+//                StartActUtil.toOrderHistory(context, "order", "消费记录")
+//            }
         } else {
             ll_user_info.visibility = View.GONE
             rl_to_login.visibility = View.VISIBLE
+            ll_logout.visibility = View.GONE
         }
         iv_avatar.setOnClickListener {
             if (!APP.getInstance().isUserLogin) {
                 toLogin()
             }
         }
-        rl_to_login.setOnClickListener { if (!APP.getInstance().isUserLogin) {
-            toLogin()
-        } }
+        rl_to_login.setOnClickListener {
+            if (!APP.getInstance().isUserLogin) {
+                toLogin()
+            }
+        }
     }
 
     private fun logout() {
         APP.getInstance().setUserInfo(null)
+        LitePal.deleteAll(UserInfo::class.java)
         refreshView()
     }
 

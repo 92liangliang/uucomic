@@ -5,8 +5,10 @@ import android.content.Intent;
 
 import com.re.ng.uu.comic.APP;
 import com.re.ng.uu.comic.base.BaseActivity;
+import com.re.ng.uu.comic.view.activity.BindPhoneActivity;
 import com.re.ng.uu.comic.view.activity.BookDetailActivity;
 import com.re.ng.uu.comic.view.activity.ComicActivity;
+import com.re.ng.uu.comic.view.activity.ExChangerVipActivity;
 import com.re.ng.uu.comic.view.activity.ForgetPwdActivity;
 import com.re.ng.uu.comic.view.activity.LoginActivity;
 import com.re.ng.uu.comic.view.activity.MainActivity;
@@ -18,8 +20,10 @@ import com.re.ng.uu.comic.view.activity.RechargeActivity;
 import com.re.ng.uu.comic.view.activity.RegisterActivity;
 import com.re.ng.uu.comic.view.activity.SearchActivity;
 import com.re.ng.uu.comic.view.activity.SearchResultActivity;
+import com.re.ng.uu.comic.view.activity.ShareActivity;
 import com.re.ng.uu.comic.view.activity.TagBooksActivity;
 import com.re.ng.uu.comic.view.activity.TimeActivity;
+import com.re.ng.uu.comic.view.activity.WalletActivity;
 
 import java.util.ArrayList;
 
@@ -126,6 +130,52 @@ public class StartActUtil {
     public static void toRecharge(Context context) {
         if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, RechargeActivity.class);
+            context.startActivity(intent);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }
+
+    public static void toShare(Context context) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, ShareActivity.class);
+            context.startActivity(intent);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }
+
+    public static void toBindPhone(Context context) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, BindPhoneActivity.class);
+            context.startActivity(intent);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }
+
+    public static void toWallet(Context context) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, WalletActivity.class);
+            context.startActivity(intent);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }   public static void toExchange(Context context) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, ExChangerVipActivity.class);
             context.startActivity(intent);
         } else {
             if (context instanceof BaseActivity) {

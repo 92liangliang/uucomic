@@ -9,6 +9,7 @@ import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.BaseBean
 import com.re.ng.uu.comic.http.bean.RechargeMoney
+import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.Util
 import com.re.ng.uu.comic.view.adapter.RechargeMoneyAdapter
 import kotlinx.android.synthetic.main.activity_recharge.*
@@ -67,6 +68,11 @@ class RechargeActivity : BaseActivity() {
                         Util.openBrowser(this@RechargeActivity, result.url)
                         showToast("支付成功后，请重新登录查看余额")
                     }
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    LogUtil.e("Error=====",e)
                 }
             })
 

@@ -65,6 +65,13 @@ public interface ApiService {
     @GET("tag/getList")
     Observable<TypeList> tagList();
 
+    @GET("tag/getAreaList")
+    Observable<TypeList> getArea();
+
+    @GET("util/share")
+    Observable<BaseBean> getShare(@Query("time") String time,
+                                  @Query("utoken") String token);
+
     @GET("tag/getBookList")
     Observable<BookList> tagBooks(@Query("tag") String tag,
                                   @Query("startItem") int page,
@@ -85,7 +92,8 @@ public interface ApiService {
     Observable<ChapterList> chapterList(@Query("book_id") String bookId);
 
     @GET("chapters/detail")
-    Observable<ChapterDetail> chapterDetail(@Query("id") String chapterId, @Query("utoken") String utoken);
+    Observable<ChapterDetail> chapterDetail(@Query("id") String chapterId,
+                                            @Query("utoken") String utoken);
 
     @GET("account/register")
     Observable<BaseBean> register(@Query("username") String username,

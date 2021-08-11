@@ -114,6 +114,7 @@ class TypeFragment : BaseLazyFragment() {
         )
 
         getTypeList();
+        getTagArea();
     }
 
     fun reload() {
@@ -130,6 +131,19 @@ class TypeFragment : BaseLazyFragment() {
                     var listOfVehicleNames: ArrayList<TypeBean> = result.tags as ArrayList<TypeBean>
                     listOfVehicleNames.add(0, typeBean)
                     setTypeList(listOfVehicleNames)
+                }
+            })
+    }
+
+    fun getTagArea() {
+        UUClient.sub(UUClient.getDefault().getArea(),
+            object : SimpleObserver<TypeList>() {
+                override fun onNext(result: TypeList) {
+                    super.onNext(result)
+//                    var typeBean = TypeBean("", 0, "全部", true)
+//                    var listOfVehicleNames: ArrayList<TypeBean> = result.tags as ArrayList<TypeBean>
+//                    listOfVehicleNames.add(0, typeBean)
+//                    setTypeList(listOfVehicleNames)
                 }
             })
     }
