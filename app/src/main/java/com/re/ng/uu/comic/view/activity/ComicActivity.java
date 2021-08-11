@@ -276,7 +276,7 @@ public class ComicActivity extends BaseActivity {
                     updateComicData(mChapterBean);
                     mChapterMap.put(mChapterBean.getLongValue(mChapterBean.getChapterId()), mChapterBean);
                 } else {
-                    if (result.getSuccess() == 0) {
+                    if (result.getSuccess() != 0) {
                         showPayDialog(chapterId, result.getMoney(), chapterName);
                     } else {
                         showToast("code " + result.getSuccess() + " 加载失败");

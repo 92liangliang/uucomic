@@ -16,6 +16,8 @@ data class NewestBooks(val newest: List<BookBean>) : BaseBean()
 
 data class EndBooks(val ends: List<BookBean>) : BaseBean()
 
+data class Channel(val date: List<ChannelBeen>) : BaseBean()
+
 data class RecommendBooks(val recommends: List<BookBean>) : BaseBean()
 
 data class HotBooks(val hots: List<BookBean>) : BaseBean()
@@ -74,6 +76,16 @@ data class CommentBean(
     val user_id: Int,
     val user: UserInfo
 )
+
+data class ChannelBeen(
+    val type: Int,
+    val code: Int,
+    val img: String,
+    val title: String,
+    val switch: Int,
+    val name: String,
+    var click:Boolean
+): LitePalSupport()
 
 data class FavorBean(
     val book: BookBean,

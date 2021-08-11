@@ -17,6 +17,7 @@ import com.re.ng.uu.comic.base.BaseBookShelfTabFragment;
 import com.re.ng.uu.comic.http.SimpleObserver;
 import com.re.ng.uu.comic.http.UUClient;
 import com.re.ng.uu.comic.http.bean.BaseBean;
+import com.re.ng.uu.comic.http.bean.ChannelBeen;
 import com.re.ng.uu.comic.http.bean.CollectVO;
 import com.re.ng.uu.comic.http.bean.EventMessage;
 import com.re.ng.uu.comic.http.bean.FavorBean;
@@ -112,6 +113,17 @@ public class CollectFragment extends BaseBookShelfTabFragment {
         for(FavorBean favorBean: favorList){
             if(favorBean.getBook() != null){
                 mNewCollectBookList.add(new CollectVO(favorBean.getBook(), favorBean.getId()));
+            }
+        }
+
+        List<ChannelBeen> channelBeens = new ArrayList<>();
+        List<ChannelBeen> channelBeens2 = new ArrayList<>();
+        for(int a=0;a<=channelBeens.size();a++){
+            if(a==0){
+                channelBeens.get(a).setClick(true);
+            }
+            if(channelBeens.get(a).getSwitch()==0){
+                channelBeens2.add(channelBeens.get(a));
             }
         }
         setCollectData(mOldCollectBookList, mNewCollectBookList);

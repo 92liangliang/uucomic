@@ -4,6 +4,7 @@ import com.re.ng.uu.comic.http.bean.BannerData;
 import com.re.ng.uu.comic.http.bean.BaseBean;
 import com.re.ng.uu.comic.http.bean.BookDetail;
 import com.re.ng.uu.comic.http.bean.BookList;
+import com.re.ng.uu.comic.http.bean.Channel;
 import com.re.ng.uu.comic.http.bean.ChapterDetail;
 import com.re.ng.uu.comic.http.bean.ChapterList;
 import com.re.ng.uu.comic.http.bean.ChargeHistoryData;
@@ -88,6 +89,9 @@ public interface ApiService {
     @GET("books/getRecommend")
     Observable<RecommendBooks> recommendBooks(@Query("book_id") String book_id);
 
+    @GET("Finance/payment")
+    Observable<Channel> getChannel(@Query("utoken") String utoken);
+
     @GET("chapters/getList")
     Observable<ChapterList> chapterList(@Query("book_id") String bookId);
 
@@ -165,6 +169,7 @@ public interface ApiService {
 
     @GET("Finance/getBalance")
     Observable<BaseBean> userBalance(@Query("utoken") String utoken);
+
 
 //    @GET("users/resetpwd")
 //    Observable<BaseBean> resetpwd(@Query("password") String password);
