@@ -28,6 +28,7 @@
             android:background="@color/colorLine" />
 
     <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -86,70 +87,142 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="进度"
+                        android:text="地区"
                         android:textStyle="bold"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_normal" />
 
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:id="@+id/linear_layout_all"
-                        android:background="@drawable/shape_red"
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_title"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp"
-                        android:gravity="center">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:id="@+id/tv_all"
-                            android:textColor="@color/colorWhite"
-                            android:text="全部" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:id="@+id/linear_layout_serialize"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp"
-                        android:gravity="center">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:id="@+id/tv_serialize"
-                            android:textColor="@color/colorBlack"
-                            android:text="连载中" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:id="@+id/linear_layout_finish"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="5dp"
-                        android:gravity="center">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:id="@+id/tv_finish"
-                            android:textColor="@color/colorBlack"
-                            android:text="已完结" />
-
-                </LinearLayout>
+                        android:overScrollMode="never"
+                        tools:listitem="@layout/cell_type" />
 
             </LinearLayout>
+
+            <RelativeLayout
+                    android:background="#ffffff"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                        android:layout_toStartOf="@+id/relative_layout_more"
+                        android:layout_toLeftOf="@+id/relative_layout_more"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_margin="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="进度"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_normal" />
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:id="@+id/linear_layout_all"
+                            android:background="@drawable/shape_red"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="5dp"
+                            android:gravity="center">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:id="@+id/tv_all"
+                                android:textColor="@color/colorWhite"
+                                android:text="全部" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:id="@+id/linear_layout_serialize"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="5dp"
+                            android:gravity="center">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:id="@+id/tv_serialize"
+                                android:textColor="@color/colorBlack"
+                                android:text="连载中" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:id="@+id/linear_layout_finish"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="5dp"
+                            android:gravity="center">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:id="@+id/tv_finish"
+                                android:textColor="@color/colorBlack"
+                                android:text="已完结" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:gravity="end|center_vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/relative_layout_more"
+                        android:layout_width="50dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginRight="15dp"
+                        android:orientation="horizontal"
+                        android:layout_height="35dp">
+
+                    <TextView
+                            android:id="@+id/tv_more_cell_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorGray_5"
+                            android:visibility="visible"
+                            android:text="筛选"
+                            android:paddingEnd="5dp"
+                            android:textSize="@dimen/text_size_small" />
+
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:id="@+id/iv_more"
+                            android:tint="@color/colorGray_5"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/svg_arrow_bottom" />
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                     android:id="@+id/refresh_layout"

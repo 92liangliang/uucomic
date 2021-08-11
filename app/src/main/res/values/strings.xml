@@ -46,7 +46,8 @@
     <string name="share_get">获取推广链接</string>
     <string name="share_rewards">推广奖励</string>
     <string name="my_wallet">我的钱包</string>
-    <string name="bind_phone">我的钱包</string>
+    <string name="bind_phone">绑定手机</string>
+    <string name="exchange_vip">兑换VIP</string>
 
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>

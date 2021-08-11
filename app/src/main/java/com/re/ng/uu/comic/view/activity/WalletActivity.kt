@@ -35,6 +35,9 @@ class WalletActivity : BaseActivity() {
         ll_order_history.setOnClickListener {
             StartActUtil.toOrderHistory(this, "order", "消费记录")
         }
+        ll_buy.setOnClickListener {
+            showToast("TODO")
+        }
     }
 
 }

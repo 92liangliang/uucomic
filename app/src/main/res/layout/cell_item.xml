@@ -49,38 +49,38 @@
                 android:textSize="@dimen/text_size_small"
                 tools:text="独家精品私人定制" />
 
-            <RelativeLayout
-                    android:layout_alignParentBottom="true"
-                    android:id="@+id/relative_layout_mode"
+        <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/relative_layout_mode"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="80dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tv_more_cell_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/iv_more"
+                    android:layout_toLeftOf="@+id/iv_more"
+                    android:textColor="@color/colorGray_5"
+                    android:visibility="visible"
+                    android:text="@string/more"
+                    android:textSize="@dimen/text_size_small" />
+
+            <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:id="@+id/iv_more"
+                    android:tint="@color/colorGray_5"
+                    android:scaleType="centerInside"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_width="80dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:id="@+id/tv_more_cell_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/iv_more"
-                        android:layout_toLeftOf="@+id/iv_more"
-                        android:textColor="@color/colorGray_5"
-                        android:visibility="visible"
-                        android:text="@string/more"
-                        android:textSize="@dimen/text_size_small" />
-
-                <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:id="@+id/iv_more"
-                        android:tint="@color/colorGray_5"
-                        android:scaleType="centerInside"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/svg_arrow_right" />
-            </RelativeLayout>
+                    android:src="@drawable/svg_arrow_right" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

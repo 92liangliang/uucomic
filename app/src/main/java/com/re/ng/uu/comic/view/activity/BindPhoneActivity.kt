@@ -22,7 +22,7 @@ class BindPhoneActivity : BaseActivity() {
         mIvBack = iv_back_layout_top
         tTitle = tv_title_layout_top
 
-        tTitle.setText(getString(R.string.my_wallet))
+        tTitle.setText(getString(R.string.bind_phone))
     }
 
     protected fun initListener() {
