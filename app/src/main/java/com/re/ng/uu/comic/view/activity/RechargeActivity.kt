@@ -37,8 +37,7 @@ class RechargeActivity : BaseActivity() {
         mRvList = view_recycler_pay
 
         view_recycler.layoutManager = GridLayoutManager(this, 2)
-        mAdapter = RechargeMoneyAdapter(this, getDatas())
-        view_recycler.adapter = mAdapter
+
         tv_submit.setOnClickListener {
             recharge()
         }
@@ -54,16 +53,27 @@ class RechargeActivity : BaseActivity() {
             )
         )
         getChannel()
+        getAmount()
     }
 
-    private fun getDatas(): List<RechargeMoney> {
+    private fun getDatas(date: List<String>): List<RechargeMoney> {
         var dataList = ArrayList<RechargeMoney>()
-        dataList.add(RechargeMoney("30元", 0, 30, false))
-        dataList.add(RechargeMoney("50元", 0, 50, false))
-        dataList.add(RechargeMoney("100元", 0, 100, true))
-        dataList.add(RechargeMoney("200元", 0, 200, false))
-        dataList.add(RechargeMoney("300元", 0, 300, false))
+        for (amount in date) {
+            dataList.add(RechargeMoney(amount + "元", 0, stringToInt(amount), false))
+        }
+        if (dataList != null) {
+            dataList.get(0).isSelected = true
+        }
+
         return dataList
+    }
+
+    fun stringToInt(s: String): Int {
+        try {
+            return Integer.parseInt(s);
+        } catch (e: NumberFormatException) {
+            return 0
+        }
     }
 
     private fun getChannel() {
@@ -82,11 +92,13 @@ class RechargeActivity : BaseActivity() {
     private fun getAmount() {
         showLoadingDialog()
         UUClient.sub(UUClient.getDefault().getAmount(APP.getInstance().getUToken()),
-            object : SimpleObserver<Channel>(dialog) {
-                override fun onNext(result: Channel) {
+            object : SimpleObserver<Amount>(dialog) {
+                override fun onNext(result: Amount) {
                     super.onNext(result)
                     if (result.date != null) {
-                        addList(result.date)
+                        mAdapter =
+                            RechargeMoneyAdapter(this@RechargeActivity, getDatas(result.date))
+                        view_recycler.adapter = mAdapter
                     }
                 }
             })

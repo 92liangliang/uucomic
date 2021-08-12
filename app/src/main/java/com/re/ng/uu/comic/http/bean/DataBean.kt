@@ -18,6 +18,8 @@ data class EndBooks(val ends: List<BookBean>) : BaseBean()
 
 data class Channel(val date: List<ChannelBeen>) : BaseBean()
 
+data class Amount(val date: List<String>) : BaseBean()
+
 data class RecommendBooks(val recommends: List<BookBean>) : BaseBean()
 
 data class HotBooks(val hots: List<BookBean>) : BaseBean()

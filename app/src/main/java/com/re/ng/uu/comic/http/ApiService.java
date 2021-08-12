@@ -1,5 +1,6 @@
 package com.re.ng.uu.comic.http;
 
+import com.re.ng.uu.comic.http.bean.Amount;
 import com.re.ng.uu.comic.http.bean.BannerData;
 import com.re.ng.uu.comic.http.bean.BaseBean;
 import com.re.ng.uu.comic.http.bean.BookDetail;
@@ -95,7 +96,7 @@ public interface ApiService {
     Observable<Channel> getChannel(@Query("utoken") String utoken);
 
     @GET("Finance/paymoney")
-    Observable<Channel> getAmount(@Query("utoken") String utoken);
+    Observable<Amount> getAmount(@Query("utoken") String utoken);
 
     @GET("chapters/getList")
     Observable<ChapterList> chapterList(@Query("book_id") String bookId);
