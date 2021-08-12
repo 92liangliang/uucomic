@@ -10,6 +10,8 @@ import java.util.*
  */
 data class TypeList(val tags: List<TypeBean>) : BaseBean()
 
+data class AreaList(val areas: List<AreaBean>) : BaseBean()
+
 data class BookList(val books: List<BookBean>) : BaseBean()
 
 data class NewestBooks(val newest: List<BookBean>) : BaseBean()
@@ -70,10 +72,11 @@ data class OrderBean(
     val usage: Int,
     val user_id: Int
 )
+
 data class ShareBean(
     val promotion_sum: String,
     val shareUrl: String,
-    val reg_reward:Int,
+    val reg_reward: Int,
     val promotion_rate: String,
     val rewards: rewardsBean
 )
@@ -85,7 +88,7 @@ data class rewardsBean(
 data class DownLineBean(
     val id: String,
     val user_id: String,
-    val money:String,
+    val money: String,
     val usage: String,
     val summary: String,
     val create_time: String,
@@ -109,8 +112,8 @@ data class ChannelBeen(
     val title: String,
     val switch: Int,
     val name: String,
-    var click:Boolean
-): LitePalSupport()
+    var click: Boolean
+) : LitePalSupport()
 
 data class FavorBean(
     val book: BookBean,
@@ -138,6 +141,12 @@ data class TypeBean(
     val cover_url: String,
     val id: Int,
     val tag_name: String,
+    var click: Boolean
+)
+
+data class AreaBean(
+    val id: Int,
+    val area_name: String,
     var click: Boolean
 )
 

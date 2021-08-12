@@ -1,6 +1,7 @@
 package com.re.ng.uu.comic.http;
 
 import com.re.ng.uu.comic.http.bean.Amount;
+import com.re.ng.uu.comic.http.bean.AreaList;
 import com.re.ng.uu.comic.http.bean.BannerData;
 import com.re.ng.uu.comic.http.bean.BaseBean;
 import com.re.ng.uu.comic.http.bean.BookDetail;
@@ -69,7 +70,7 @@ public interface ApiService {
     Observable<TypeList> tagList();
 
     @GET("tag/getAreaList")
-    Observable<TypeList> getArea();
+    Observable<AreaList> getArea();
 
     @GET("Users/getshare")
     Observable<ShareData> getShare(
@@ -81,7 +82,8 @@ public interface ApiService {
                                   @Query("pageSize") int pageSize);
 
     @GET("tag/getBookList")
-    Observable<BookList> tagBooks(@Query("tag") String tag,
+    Observable<BookList> tagBooks(@Query("area") int area,
+                                  @Query("tag") String tag,
                                   @Query("end") int end,
                                   @Query("startItem") int page,
                                   @Query("pageSize") int pageSize);
@@ -174,6 +176,10 @@ public interface ApiService {
 
     @GET("Finance/buyhistory")
     Observable<BaseBean> buyhistory(@Query("utoken") String utoken);
+
+   @GET("Finance/vipexchange")
+    Observable<BaseBean> exchangeVip(@Query("utoken") String utoken,
+                                    @Query("code") String code);
 
     @GET("Users/bindphone")
     Observable<BaseBean> bindphone(@Query("utoken") String utoken,

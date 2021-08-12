@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -17,14 +16,12 @@ import com.re.ng.uu.comic.R
 import com.re.ng.uu.comic.base.BaseLazyFragment
 import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
-import com.re.ng.uu.comic.http.bean.BookBean
-import com.re.ng.uu.comic.http.bean.BookList
-import com.re.ng.uu.comic.http.bean.TypeBean
-import com.re.ng.uu.comic.http.bean.TypeList
+import com.re.ng.uu.comic.http.bean.*
 import com.re.ng.uu.comic.http.bean.rv_cell.BookCell
 import com.re.ng.uu.comic.util.DialogUtil
 import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.StartActUtil
+import com.re.ng.uu.comic.view.adapter.AreaAdapter
 import com.re.ng.uu.comic.view.adapter.TypeAdapter
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
@@ -37,7 +34,7 @@ class TypeFragment : BaseLazyFragment() {
     lateinit var mRvListTitle: RecyclerView
     lateinit var llMore: LinearLayout
     lateinit var typeAdapter: TypeAdapter
-    lateinit var typeTitleAdapter: TypeAdapter
+    lateinit var typeTitleAdapter: AreaAdapter
     lateinit var llAll: LinearLayout
     lateinit var tvAll: TextView
     lateinit var ivMore: ImageView
@@ -49,7 +46,7 @@ class TypeFragment : BaseLazyFragment() {
     lateinit var mRvListResult: RecyclerView
     var type: Int = -1
     var bookTag: String = ""
-    var bookTitle: String = ""
+    var areaBook: Int = -1
     var isGrid: Boolean = true
     private var page = 0
     private var pageSize = 102
@@ -131,12 +128,9 @@ class TypeFragment : BaseLazyFragment() {
         )
 
         mRvListTitle.setLayoutManager(
-            LinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
+            GridLayoutManager(activity, 2, GridLayoutManager.HORIZONTAL, false)
         )
+
 
         getTypeList();
         getTagArea();
@@ -144,22 +138,21 @@ class TypeFragment : BaseLazyFragment() {
 
     fun reload() {
         page = 0
-        getTagBooks(bookTag)
-        getTitleBooks(bookTitle)
+        getTagBooks(bookTag, areaBook)
     }
 
     fun reloadList() {
         if (isGrid) {
-            scrollView.scrollTo(0,0)
+            scrollView.scrollTo(0, 0)
             ivMore.setImageDrawable(getResources().getDrawable(R.drawable.svg_arrow_bottom))
             mRvList.setLayoutManager(
                 GridLayoutManager(activity, 3, GridLayoutManager.HORIZONTAL, false)
             )
         } else {
-            scrollView.scrollTo(0,0)
+            scrollView.scrollTo(0, 0)
             ivMore.setImageDrawable(getResources().getDrawable(R.drawable.svg_arrow_top))
             mRvList.setLayoutManager(
-                GridLayoutManager(activity, 4, GridLayoutManager.VERTICAL,false)
+                GridLayoutManager(activity, 4, GridLayoutManager.VERTICAL, false)
             )
         }
     }
@@ -179,28 +172,34 @@ class TypeFragment : BaseLazyFragment() {
 
     fun getTagArea() {
         UUClient.sub(UUClient.getDefault().getArea(),
-            object : SimpleObserver<TypeList>() {
-                override fun onNext(result: TypeList) {
+            object : SimpleObserver<AreaList>() {
+                override fun onNext(result: AreaList) {
                     super.onNext(result)
-//                    var typeBean = TypeBean("", 0, "全部", true)
-//                    var listOfVehicleNames: ArrayList<TypeBean> = result.tags as ArrayList<TypeBean>
-//                    listOfVehicleNames.add(0, typeBean)
-//                    setTypeList(listOfVehicleNames)
+                    var areaBean = AreaBean(-1, "全部", true)
+                    var listOfVehicleNames: ArrayList<AreaBean> =
+                        result.areas as ArrayList<AreaBean>
+                    listOfVehicleNames.add(0, areaBean)
+                    setAreaList(listOfVehicleNames)
                 }
             })
     }
 
-    fun getTagBooks(bookTag: String) {
+    fun getTagBooks(bookTag: String, area: Int) {
         var tag = ""
         if (bookTag.equals("全部")) {
             tag = "";
         } else {
             tag = bookTag
         }
+
+        var a: Int = -1
+        if (area >= 0) {
+            a = area
+        }
         LogUtil.e("chceck tag=" + tag)
         LogUtil.e("chceck type=" + type)
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().tagBooks(tag, type, page, pageSize),
+        UUClient.sub(UUClient.getDefault().tagBooks(a, tag, type, page, pageSize),
             object : SimpleObserver<BookList>(mDialog) {
                 override fun onNext(result: BookList) {
                     super.onNext(result)
@@ -212,24 +211,24 @@ class TypeFragment : BaseLazyFragment() {
     }
 
     fun getTitleBooks(bookTag: String) {
-        var tag = ""
-        if (bookTag.equals("全部")) {
-            tag = "";
-        } else {
-            tag = bookTag
-        }
-        LogUtil.e("chceck tag=" + tag)
-        LogUtil.e("chceck type=" + type)
-        showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().tagBooks(tag, type, page, pageSize),
-            object : SimpleObserver<BookList>(mDialog) {
-                override fun onNext(result: BookList) {
-                    super.onNext(result)
-                    if (result.books != null) {
-                        setSearchResult(result.books)
-                    }
-                }
-            })
+//        var tag = ""
+//        if (bookTag.equals("全部")) {
+//            tag = "";
+//        } else {
+//            tag = bookTag
+//        }
+//        LogUtil.e("chceck tag=" + tag)
+//        LogUtil.e("chceck type=" + type)
+//        showLoadingDialog()
+//        UUClient.sub(UUClient.getDefault().tagBooks("",tag, type, page, pageSize),
+//            object : SimpleObserver<BookList>(mDialog) {
+//                override fun onNext(result: BookList) {
+//                    super.onNext(result)
+//                    if (result.books != null) {
+//                        setSearchResult(result.books)
+//                    }
+//                }
+//            })
     }
 
     fun setTypeList(list: List<TypeBean>) {
@@ -238,28 +237,28 @@ class TypeFragment : BaseLazyFragment() {
             override fun onClickItem(type: TypeBean?) {
                 if (type != null) {
                     bookTag = type.tag_name
-                    getTagBooks(bookTag)
+                    getTagBooks(bookTag, areaBook)
                 }
             }
 
         })
         mRvList.setAdapter(typeAdapter)
-        getTagBooks(bookTag);
+        getTagBooks(bookTag, areaBook);
     }
 
-    fun setTypeTitleList(list: List<TypeBean>) {
-        typeTitleAdapter = TypeAdapter(mBaseActivity, list)
-        typeTitleAdapter.setListener(object : TypeAdapter.OnClickListener {
-            override fun onClickItem(type: TypeBean?) {
+    fun setAreaList(list: List<AreaBean>) {
+        typeTitleAdapter = AreaAdapter(mBaseActivity, list)
+        typeTitleAdapter.setListener(object : AreaAdapter.OnClickListener {
+            override fun onClickItem(type: AreaBean?) {
                 if (type != null) {
-                    bookTitle = type.tag_name
-                    getTagBooks(bookTitle)
+                    areaBook = type.id
+                    getTagBooks(bookTag, areaBook)
                 }
             }
 
         })
         mRvListTitle.setAdapter(typeTitleAdapter)
-        getTitleBooks(bookTitle);
+//        getTagBooks(bookTag);
     }
 
     fun reloadClick(textView: TextView, linearLayout: LinearLayout, click: Boolean) {
