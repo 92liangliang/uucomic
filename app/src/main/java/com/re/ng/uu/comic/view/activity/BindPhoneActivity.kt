@@ -83,23 +83,6 @@ class BindPhoneActivity : BaseActivity() {
             return
         }
         sendCode(number);
-        resendTimer = object : CountDownTimer(RESEND_DURATION, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val text = String.format(
-                    Locale.getDefault(), "%d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
-                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
-                )
-                tvGetCode.setText(text + "s")
-                tvGetCode.setClickable(false)
-            }
-
-            override fun onFinish() {
-                tvGetCode.setText("获取验证码")
-                tvGetCode.setClickable(true)
-            }
-        }
-        (resendTimer as CountDownTimer).start()
     }
 
     fun submitBind() {
@@ -120,10 +103,11 @@ class BindPhoneActivity : BaseActivity() {
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)
-                    showToast("绑定成功")
-                    val returnIntent = Intent()
-                    setResult(RESULT_OK, returnIntent)
-                    finish()
+                    if (result.isSuccess) {
+                        val returnIntent = Intent()
+                        setResult(RESULT_OK, returnIntent)
+                        finish()
+                    }
                 }
             })
 
@@ -137,7 +121,25 @@ class BindPhoneActivity : BaseActivity() {
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)
-                    showToast("验证码已经发送")
+                    if (result.isSuccess) {
+                        showToast("验证码已经发送")
+                        resendTimer = object : CountDownTimer(RESEND_DURATION, 1000) {
+                            override fun onTick(millisUntilFinished: Long) {
+                                val text = String.format(
+                                    Locale.getDefault(), "%02d",
+                                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
+                                )
+                                tvGetCode.setText(text + "s")
+                                tvGetCode.setClickable(false)
+                            }
+
+                            override fun onFinish() {
+                                tvGetCode.setText("获取验证码")
+                                tvGetCode.setClickable(true)
+                            }
+                        }
+                        (resendTimer as CountDownTimer).start()
+                    }
                 }
             })
     }
