@@ -181,6 +181,9 @@ public interface ApiService {
     Observable<BaseBean> exchangeVip(@Query("utoken") String utoken,
                                     @Query("code") String code);
 
+   @GET("Users/updateUser")
+    Observable<LoginData> refresh(@Query("utoken") String utoken);
+
     @GET("Users/bindphone")
     Observable<BaseBean> bindphone(@Query("utoken") String utoken,
                                    @Query("phonecode") String mobile,

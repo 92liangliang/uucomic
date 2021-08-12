@@ -1,10 +1,15 @@
 package com.re.ng.uu.comic.view.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import com.re.ng.uu.comic.APP
 import com.re.ng.uu.comic.R
 import com.re.ng.uu.comic.base.BaseLazyFragment
+import com.re.ng.uu.comic.http.SimpleObserver
+import com.re.ng.uu.comic.http.UUClient
+import com.re.ng.uu.comic.http.bean.LoginData
 import com.re.ng.uu.comic.http.bean.UserInfo
 import com.re.ng.uu.comic.util.DateUtil
 import com.re.ng.uu.comic.util.StartActUtil
@@ -12,10 +17,12 @@ import kotlinx.android.synthetic.main.fragment_mine.*
 import org.litepal.LitePal
 import java.util.*
 
+
 /**
  * Date    : 2020-11-12
  */
 class MineFragment : BaseLazyFragment() {
+    var LAUNCH_SECOND_ACTIVITY: Int = 12333
 
     override fun lazyLoad() {
 
@@ -45,6 +52,12 @@ class MineFragment : BaseLazyFragment() {
             } else {
                 tv_username.text = "${userInfo.nick_name}"
             }
+
+            if (!TextUtils.isEmpty(userInfo.mobile)) {
+                text_bind_phone.text = "查看手机"
+            } else {
+                text_bind_phone.text = "绑定手机"
+            }
             var days = DateUtil.diffDays(Date(), Date(userInfo.vip_expire_time * 1000L))
             if (days <= 0) {
                 days = 0
@@ -52,7 +65,7 @@ class MineFragment : BaseLazyFragment() {
             tv_vip_time.text = "VIP: 剩余${days}天"
             tv_amount.text = "账户余额: ${userInfo.balance}元"
             ll_bind_phone.setOnClickListener {
-                StartActUtil.toBindPhone(context)
+                StartActUtil.toBindPhone(activity, LAUNCH_SECOND_ACTIVITY)
             }
             ll_share.setOnClickListener {
                 StartActUtil.toShare(context)
@@ -64,7 +77,7 @@ class MineFragment : BaseLazyFragment() {
                 StartActUtil.toRecharge(context)
             }
             ll_exchange_vip.setOnClickListener {
-                StartActUtil.toExchange(context)
+                StartActUtil.toExchange(activity, LAUNCH_SECOND_ACTIVITY)
             }
             ll_get_vip.setOnClickListener {
                 StartActUtil.toGetVIP(context)
@@ -95,6 +108,15 @@ class MineFragment : BaseLazyFragment() {
         }
     }
 
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if (resultCode == Activity.RESULT_OK) {
+                reloadInfo()
+            }
+        }
+    }
+
     private fun logout() {
         APP.getInstance().setUserInfo(null)
         LitePal.deleteAll(UserInfo::class.java)
@@ -103,5 +125,26 @@ class MineFragment : BaseLazyFragment() {
 
     private fun toLogin() {
         StartActUtil.toLogin(context)
+    }
+
+    public fun reloadInfo() {
+        UUClient.sub(
+            UUClient.getDefault().refresh(APP.getInstance().uToken),
+            object : SimpleObserver<LoginData>() {
+                override fun onNext(result: LoginData) {
+                    super.onNext(result)
+                    if (result.isSuccess) {
+                        result.userInfo.password = APP.getInstance().password
+                        result.userInfo.utoken = APP.getInstance().uToken
+                        APP.getInstance().setUserInfo(result.userInfo)
+                    }
+                    refreshView()
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    refreshView()
+                }
+            })
     }
 }

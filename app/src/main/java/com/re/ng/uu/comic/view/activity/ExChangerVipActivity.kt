@@ -1,5 +1,6 @@
 package com.re.ng.uu.comic.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.re.ng.uu.comic.http.UUClient
 import com.re.ng.uu.comic.http.bean.BaseBean
 import kotlinx.android.synthetic.main.activity_exchange_vip.*
 import kotlinx.android.synthetic.main.layout_top.*
+
 
 class ExChangerVipActivity : BaseActivity() {
     lateinit var mIvBack: ImageView
@@ -38,9 +40,9 @@ class ExChangerVipActivity : BaseActivity() {
         mIvBack.setOnClickListener { onBackPressed() }
         tSubmit.setOnClickListener {
             var code = etCode.text.toString();
-            if(code !=null) {
+            if (code != null) {
                 exchangeVip(code)
-            }else{
+            } else {
                 showToast("请输入兑换码")
             }
         }
@@ -56,6 +58,9 @@ class ExChangerVipActivity : BaseActivity() {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)
                     showToast("成功")
+                    val returnIntent = Intent()
+                    setResult(RESULT_OK, returnIntent)
+                    finish()
                 }
             })
     }

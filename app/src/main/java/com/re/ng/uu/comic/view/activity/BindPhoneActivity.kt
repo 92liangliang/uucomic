@@ -1,8 +1,10 @@
 package com.re.ng.uu.comic.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.TextUtils
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,11 +43,28 @@ class BindPhoneActivity : BaseActivity() {
         tvGetCode = tv_get_code
         tvSubmit = tv_submit
 
-        tTitle.setText(getString(R.string.bind_phone))
+
+        var userInfo = APP.getInstance().userInfo
+        if (!TextUtils.isEmpty(userInfo.mobile)) {
+            tTitle.setText("查看手机")
+            etNumber.setText(userInfo.mobile)
+            relative_layout_send.visibility = View.GONE
+            relative_layout_submit.visibility = View.GONE
+            etNumber.isClickable = false
+            etNumber.isSelected = false
+            etNumber.isFocusable = false
+            etNumber.isFocusableInTouchMode = false
+        } else {
+            tTitle.setText("绑定手机")
+            relative_layout_send.visibility = View.VISIBLE
+            relative_layout_submit.visibility = View.VISIBLE
+        }
     }
 
     protected fun initListener() {
-        mIvBack.setOnClickListener { onBackPressed() }
+        mIvBack.setOnClickListener {
+            onBackPressed()
+        }
         tvGetCode.setOnClickListener {
             getCode()
         }
@@ -102,6 +121,8 @@ class BindPhoneActivity : BaseActivity() {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)
                     showToast("绑定成功")
+                    val returnIntent = Intent()
+                    setResult(RESULT_OK, returnIntent)
                     finish()
                 }
             })

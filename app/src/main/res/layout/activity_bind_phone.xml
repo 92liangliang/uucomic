@@ -70,6 +70,7 @@
     </LinearLayout>
 
     <RelativeLayout
+            android:id="@+id/relative_layout_send"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingLeft="20dp"
@@ -128,6 +129,7 @@
             android:layout_height="wrap_content" />
 
     <RelativeLayout
+            android:id="@+id/relative_layout_submit"
             android:layout_marginTop="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"

@@ -131,7 +131,7 @@ data class UserInfo(
     val nick_name: String,
     val uid: Int,
     val username: String,
-    val utoken: String
+    var utoken: String
 ) : LitePalSupport() {
     var vip_expire_time: Int = 0
     var password: String? = null

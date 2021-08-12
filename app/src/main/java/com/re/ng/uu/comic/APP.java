@@ -72,7 +72,7 @@ public class APP extends Application {
     }
 
     private void storeUserInfo() {
-        if(userInfo != null){
+        if (userInfo != null) {
             LitePal.deleteAll(UserInfo.class);
             userInfo.save();
         }
@@ -83,6 +83,13 @@ public class APP extends Application {
     public String getUToken() {
         if (isUserLogin()) {
             return userInfo.getUtoken();
+        }
+        return null;
+    }
+
+    public String getPassword() {
+        if (isUserLogin()) {
+            return userInfo.getPassword();
         }
         return null;
     }

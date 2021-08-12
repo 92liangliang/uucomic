@@ -1,5 +1,6 @@
 package com.re.ng.uu.comic.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -151,10 +152,10 @@ public class StartActUtil {
         }
     }
 
-    public static void toBindPhone(Context context) {
+    public static void toBindPhone(Activity context, int code) {
         if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, BindPhoneActivity.class);
-            context.startActivity(intent);
+            context.startActivityForResult(intent, code);
         } else {
             if (context instanceof BaseActivity) {
                 ((BaseActivity) context).showToast("请先登录");
@@ -173,10 +174,12 @@ public class StartActUtil {
             }
             toLogin(context);
         }
-    }   public static void toExchange(Context context) {
+    }
+
+    public static void toExchange(Activity context, int code) {
         if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, ExChangerVipActivity.class);
-            context.startActivity(intent);
+            context.startActivityForResult(intent, code);
         } else {
             if (context instanceof BaseActivity) {
                 ((BaseActivity) context).showToast("请先登录");

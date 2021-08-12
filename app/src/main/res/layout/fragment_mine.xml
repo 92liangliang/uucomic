@@ -145,6 +145,7 @@
                         android:src="@mipmap/ic_find_1" />
 
                 <TextView
+                        android:id="@+id/text_bind_phone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
