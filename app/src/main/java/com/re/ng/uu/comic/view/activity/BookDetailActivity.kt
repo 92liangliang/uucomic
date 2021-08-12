@@ -32,7 +32,6 @@ import com.re.ng.uu.comic.util.AnimateUtil
 import com.re.ng.uu.comic.util.ImageUtil
 import com.re.ng.uu.comic.util.LogUtil
 import com.re.ng.uu.comic.util.StartActUtil
-import com.re.ng.uu.comic.view.fragment.BookDetail.TabCommentFragment
 import com.re.ng.uu.comic.view.fragment.BookDetail.TabDetailFragment
 import com.re.ng.uu.comic.view.fragment.BookDetail.TabDirFragment
 import com.zhy.view.flowlayout.FlowLayout
@@ -96,7 +95,7 @@ class BookDetailActivity : BaseActivity() {
         if (mBookId != null) {
             mFList.add(TabDetailFragment())
             mFList.add(TabDirFragment())
-            mFList.add(TabCommentFragment())
+//            mFList.add(TabCommentFragment())
         }
     }
 
@@ -367,7 +366,7 @@ class BookDetailActivity : BaseActivity() {
         }
         (mFList[0] as TabDetailFragment).setData(bean)
         (mFList[1] as TabDirFragment).setData(bean)
-        (mFList[2] as TabCommentFragment).setData(bean)
+//        (mFList[2] as TabCommentFragment).setData(bean)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

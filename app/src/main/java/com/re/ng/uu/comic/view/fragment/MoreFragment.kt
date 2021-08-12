@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.rdc.bms.easy_rv_adapter.OnClickViewRvListener
 import com.rdc.bms.easy_rv_adapter.base.BaseRvCell
+import com.re.ng.uu.comic.APP
 import com.re.ng.uu.comic.base.BaseAbsFragment
 import com.re.ng.uu.comic.http.SimpleObserver
 import com.re.ng.uu.comic.http.UUClient
@@ -50,6 +51,7 @@ public class MoreFragment : BaseAbsFragment() {
         } else if (mType.equals("热血")) {
             getTagBooks("热血")
         }else if (mType.equals("购买作品")) {
+            getHistory()
         }
     }
 
@@ -112,6 +114,19 @@ public class MoreFragment : BaseAbsFragment() {
                     if (result.books != null) {
                         setList(result.books)
                     }
+                }
+            })
+    }
+
+    private fun getHistory( ) {
+        showLoadingDialog()
+        UUClient.sub(UUClient.getDefault().buyhistory(APP.getInstance().uToken),
+            object : SimpleObserver<BaseBean>(mDialog) {
+                override fun onNext(result: BaseBean) {
+                    super.onNext(result)
+//                    if (result.books != null) {
+//                        setList(result.books)
+//                    }
                 }
             })
     }

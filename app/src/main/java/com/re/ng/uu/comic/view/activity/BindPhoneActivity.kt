@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.re.ng.uu.comic.APP
 import com.re.ng.uu.comic.R
 import com.re.ng.uu.comic.base.BaseActivity
 import com.re.ng.uu.comic.http.SimpleObserver
@@ -58,6 +59,10 @@ class BindPhoneActivity : BaseActivity() {
 
     fun getCode() {
         var number = etNumber.text.toString()
+        if (TextUtils.isEmpty(number)) {
+            showToast("请输入手机号码")
+            return
+        }
         sendCode(number);
         resendTimer = object : CountDownTimer(RESEND_DURATION, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -82,7 +87,7 @@ class BindPhoneActivity : BaseActivity() {
         var number = etNumber.text.toString()
         var verifyCode = etVerifyCode.text.toString()
         if (TextUtils.isEmpty(number)) {
-            showToast("请先获取手机验证码")
+            showToast("请输入手机号码")
             return
         }
         if (TextUtils.isEmpty(verifyCode)) {
@@ -92,7 +97,7 @@ class BindPhoneActivity : BaseActivity() {
 
         showLoadingDialog()
         UUClient.sub(
-            UUClient.getDefault().bindphone(number, verifyCode),
+            UUClient.getDefault().bindphone(APP.getInstance().uToken, number, verifyCode),
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)
@@ -104,9 +109,10 @@ class BindPhoneActivity : BaseActivity() {
     }
 
     private fun sendCode(phoneNumber: String) {
+
         showLoadingDialog()
         UUClient.sub(
-            UUClient.getDefault().sendcms(phoneNumber),
+            UUClient.getDefault().sendcms(APP.getInstance().uToken, phoneNumber),
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)

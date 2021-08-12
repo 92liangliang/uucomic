@@ -169,10 +169,15 @@ public interface ApiService {
     Observable<ChargeHistoryData> rechargeHistory(@Query("utoken") String utoken);
 
     @GET("Users/sendcms")
-    Observable<BaseBean> sendcms(@Query("mobile") String mobile);
+    Observable<BaseBean> sendcms(@Query("utoken") String utoken,
+                                 @Query("phone") String mobile);
 
-    @GET("util/bindphone")
-    Observable<BaseBean> bindphone(@Query("phonecode") String mobile,
+    @GET("Finance/buyhistory")
+    Observable<BaseBean> buyhistory(@Query("utoken") String utoken);
+
+    @GET("Users/bindphone")
+    Observable<BaseBean> bindphone(@Query("utoken") String utoken,
+                                   @Query("phonecode") String mobile,
                                    @Query("phone") String phone);
 
     @GET("users/getVipExpireTime")

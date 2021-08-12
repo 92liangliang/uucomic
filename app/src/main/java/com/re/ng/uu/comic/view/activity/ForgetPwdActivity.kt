@@ -95,7 +95,7 @@ class ForgetPwdActivity : BaseActivity() {
 
     private fun getSmsCode() {
         UUClient.sub(
-            UUClient.getDefault().sendcms(phoneNumber),
+            UUClient.getDefault().sendcms(phoneNumber,""),
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)

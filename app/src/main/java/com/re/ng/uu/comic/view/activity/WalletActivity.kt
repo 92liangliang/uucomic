@@ -35,9 +35,9 @@ class WalletActivity : BaseActivity() {
         ll_order_history.setOnClickListener {
             StartActUtil.toOrderHistory(this, "order", "消费记录")
         }
-        ll_buy.setOnClickListener {
-            StartActUtil.toMoreAct(this, "购买作品", "购买作品")
-        }
+//        ll_buy.setOnClickListener {
+//            StartActUtil.toMoreAct(this, "购买作品", "购买作品")
+//        }
     }
 
 }

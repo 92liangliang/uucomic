@@ -71,6 +71,7 @@ class RankingActivity : BaseActivity() {
         lLHot = linear_layout_hot
         lLFull = linear_layout_full
         lLTopup = linear_layout_topup
+        lLTopup.visibility = View.GONE
         mRvList = rv_list
         refreshLayout = refresh_layout
         mHistoryAdapter = RvSimpleAdapter()
