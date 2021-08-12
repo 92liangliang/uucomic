@@ -2,6 +2,7 @@ package com.re.ng.uu.comic.view.activity
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -52,7 +53,7 @@ class BindPhoneActivity : BaseActivity() {
         }
     }
 
-    var RESEND_DURATION = (10 * 60 * 1000).toLong()
+    var RESEND_DURATION = (1 * 60 * 1000).toLong()
     private var resendTimer: CountDownTimer? = null
 
     fun getCode() {
@@ -80,6 +81,26 @@ class BindPhoneActivity : BaseActivity() {
     fun submitBind() {
         var number = etNumber.text.toString()
         var verifyCode = etVerifyCode.text.toString()
+        if (TextUtils.isEmpty(number)) {
+            showToast("请先获取手机验证码")
+            return
+        }
+        if (TextUtils.isEmpty(verifyCode)) {
+            showToast("请输入手机验证码")
+            return
+        }
+
+        showLoadingDialog()
+        UUClient.sub(
+            UUClient.getDefault().bindphone(number, verifyCode),
+            object : SimpleObserver<BaseBean>(dialog) {
+                override fun onNext(result: BaseBean) {
+                    super.onNext(result)
+                    showToast("绑定成功")
+                    finish()
+                }
+            })
+
     }
 
     private fun sendCode(phoneNumber: String) {

@@ -57,6 +57,8 @@ data class OrderData(val spendings: List<OrderBean>) : BaseBean()
 
 data class ChargeHistoryData(val charges: List<OrderBean>) : BaseBean()
 
+data class ShareData(val data: ShareBean) : BaseBean()
+
 data class OrderBean(
     val create_time: String,
     val id: Int,
@@ -65,6 +67,27 @@ data class OrderBean(
     val update_time: String,
     val usage: Int,
     val user_id: Int
+)
+data class ShareBean(
+    val promotion_sum: String,
+    val shareUrl: String,
+    val reg_reward:Int,
+    val promotion_rate: String,
+    val rewards: rewardsBean
+)
+
+data class rewardsBean(
+    val data: List<DownLineBean>
+)
+
+data class DownLineBean(
+    val id: String,
+    val user_id: String,
+    val money:String,
+    val usage: String,
+    val summary: String,
+    val create_time: String,
+    val update_time: String
 )
 
 data class CommentBean(

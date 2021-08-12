@@ -62,13 +62,26 @@ class RechargeActivity : BaseActivity() {
         dataList.add(RechargeMoney("50元", 0, 50, false))
         dataList.add(RechargeMoney("100元", 0, 100, true))
         dataList.add(RechargeMoney("200元", 0, 200, false))
-//        dataList.add(RechargeMoney("300元", 0, 300, false))
+        dataList.add(RechargeMoney("300元", 0, 300, false))
         return dataList
     }
 
     private fun getChannel() {
         showLoadingDialog()
         UUClient.sub(UUClient.getDefault().getChannel(APP.getInstance().getUToken()),
+            object : SimpleObserver<Channel>(dialog) {
+                override fun onNext(result: Channel) {
+                    super.onNext(result)
+                    if (result.date != null) {
+                        addList(result.date)
+                    }
+                }
+            })
+    }
+
+    private fun getAmount() {
+        showLoadingDialog()
+        UUClient.sub(UUClient.getDefault().getAmount(APP.getInstance().getUToken()),
             object : SimpleObserver<Channel>(dialog) {
                 override fun onNext(result: Channel) {
                     super.onNext(result)

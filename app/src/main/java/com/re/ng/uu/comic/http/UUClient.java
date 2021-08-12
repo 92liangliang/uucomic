@@ -2,7 +2,6 @@ package com.re.ng.uu.comic.http;
 
 import android.text.TextUtils;
 
-import com.re.ng.uu.comic.APP;
 import com.re.ng.uu.comic.config.ApiConstant;
 import com.re.ng.uu.comic.util.LogUtil;
 
@@ -13,12 +12,9 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -77,55 +73,55 @@ public class UUClient {
         return mOkHttpClient;
     }
 
-    private static OkHttpClient getRechargeClient() {
-        OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)//设置超时时间
-                .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
-                .writeTimeout(10, TimeUnit.SECONDS);//设置写入超时时间
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        builder.addInterceptor(logging);
-        OkHttpClient mOkHttpClient = builder
-                .followRedirects(false)
-                .followSslRedirects(false)
-//                .addInterceptor(new RedirectInterceptor())
-                .build();
-        return mOkHttpClient;
-    }
+//    private static OkHttpClient getRechargeClient() {
+//        OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
+//                .connectTimeout(10, TimeUnit.SECONDS)//设置超时时间
+//                .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
+//                .writeTimeout(10, TimeUnit.SECONDS);//设置写入超时时间
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        builder.addInterceptor(logging);
+//        OkHttpClient mOkHttpClient = builder
+//                .followRedirects(false)
+//                .followSslRedirects(false)
+////                .addInterceptor(new RedirectInterceptor())
+//                .build();
+//        return mOkHttpClient;
+//    }
 
-    public static Observable<String> recharge(String money, int pay_type) {
-
-        return Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                String time = getTime();
-                String token = UUClient.md5("hahmh" + time);
-                OkHttpClient client = getRechargeClient();
-                FormBody formBody = new FormBody.Builder()
-                        .add("money", money)
-                        .add("pay_type", pay_type + "")
-                        .add("time", time)
-                        .add("token", token)
-                        .add("utoken", APP.getInstance().getUToken())
-                        .build();
-                Request request = new Request.Builder()
-                        .url(ApiConstant.UU_API_URL + "Finance/charge")
-                        .post(formBody).build();
-                Response response = client.newCall(request).execute();
-                String location = response.headers().get("Location");
-                LogUtil.d("OkHttp", "location = " + location);
-                if (response.isSuccessful()) {
-                    emitter.onNext(response.body().string());
-                    emitter.onComplete();
-                } else if (response.code() == 302) {
-                    emitter.onNext(location);
-                    emitter.onComplete();
-                } else {
-                    emitter.onError(new Throwable("网络错误"));
-                }
-            }
-        });
-    }
+//    public static Observable<String> recharge(String money, int pay_type) {
+//
+//        return Observable.create(new ObservableOnSubscribe<String>() {
+//            @Override
+//            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+//                String time = getTime();
+//                String token = UUClient.md5("hahmh" + time);
+//                OkHttpClient client = getRechargeClient();
+//                FormBody formBody = new FormBody.Builder()
+//                        .add("money", money)
+//                        .add("pay_type", pay_type + "")
+//                        .add("time", time)
+//                        .add("token", token)
+//                        .add("utoken", APP.getInstance().getUToken())
+//                        .build();
+//                Request request = new Request.Builder()
+//                        .url(ApiConstant.UU_API_URL + "Finance/charge")
+//                        .post(formBody).build();
+//                Response response = client.newCall(request).execute();
+//                String location = response.headers().get("Location");
+//                LogUtil.d("OkHttp", "location = " + location);
+//                if (response.isSuccessful()) {
+//                    emitter.onNext(response.body().string());
+//                    emitter.onComplete();
+//                } else if (response.code() == 302) {
+//                    emitter.onNext(location);
+//                    emitter.onComplete();
+//                } else {
+//                    emitter.onError(new Throwable("网络错误"));
+//                }
+//            }
+//        });
+//    }
 
     public static String getTime() {
         return String.valueOf(new Date().getTime() / 1000L);

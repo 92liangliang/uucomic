@@ -38,12 +38,12 @@ public class SimpleObserver<T> implements Observer<T> {
     public void onNext(T result) {
         closeLoading();
         if (result instanceof BaseBean) {
-            LogUtil.d("AppLog Response"+ result.toString());
+            LogUtil.d("AppLog Response=" + result.toString());
             if (!((BaseBean) result).isSuccess() && ((BaseBean) result).getErr() == 1) {
                 String msg = ((BaseBean) result).getMsg();
                 if (!TextUtils.isEmpty(msg)) {
 //                    msg = "未知错误";
-                    LogUtil.d("AppLog Response"+ msg);
+                    LogUtil.d("AppLog Response" + msg);
                     ToastUtil.show(msg);
                 }
 

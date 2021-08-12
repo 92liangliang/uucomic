@@ -49,6 +49,7 @@ public class MoreFragment : BaseAbsFragment() {
             getEndBooks()
         } else if (mType.equals("热血")) {
             getTagBooks("热血")
+        }else if (mType.equals("购买作品")) {
         }
     }
 

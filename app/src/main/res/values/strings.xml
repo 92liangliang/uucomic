@@ -43,7 +43,7 @@
     <string name="share_title">推广奖励</string>
     <string name="share_info1">-通过您的推广链接注册的会员自动成为您的下线, 同时您会获得1元的奖励</string>
     <string name="share_info2">-下线会员任何一笔充值，您都有10%的奖励</string>
-    <string name="share_get">获取推广链接</string>
+    <string name="share_get">复制推广链接</string>
     <string name="share_rewards">推广奖励</string>
     <string name="my_wallet">我的钱包</string>
     <string name="bind_phone">绑定手机</string>

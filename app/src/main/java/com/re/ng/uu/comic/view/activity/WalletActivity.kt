@@ -36,7 +36,7 @@ class WalletActivity : BaseActivity() {
             StartActUtil.toOrderHistory(this, "order", "消费记录")
         }
         ll_buy.setOnClickListener {
-            showToast("TODO")
+            StartActUtil.toMoreAct(this, "购买作品", "购买作品")
         }
     }
 

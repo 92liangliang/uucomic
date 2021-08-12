@@ -19,6 +19,7 @@ import com.re.ng.uu.comic.http.bean.OrderData;
 import com.re.ng.uu.comic.http.bean.PayResult;
 import com.re.ng.uu.comic.http.bean.RecommendBooks;
 import com.re.ng.uu.comic.http.bean.SearchBean;
+import com.re.ng.uu.comic.http.bean.ShareData;
 import com.re.ng.uu.comic.http.bean.TypeList;
 import com.re.ng.uu.comic.http.bean.mostChargedBooks;
 import com.re.ng.uu.comic.http.bean.updateBooks;
@@ -69,14 +70,15 @@ public interface ApiService {
     @GET("tag/getAreaList")
     Observable<TypeList> getArea();
 
-    @GET("util/share")
-    Observable<BaseBean> getShare(@Query("time") String time,
+    @GET("Users/getshare")
+    Observable<ShareData> getShare(
                                   @Query("utoken") String token);
 
     @GET("tag/getBookList")
     Observable<BookList> tagBooks(@Query("tag") String tag,
                                   @Query("startItem") int page,
                                   @Query("pageSize") int pageSize);
+
     @GET("tag/getBookList")
     Observable<BookList> tagBooks(@Query("tag") String tag,
                                   @Query("end") int end,
@@ -91,6 +93,9 @@ public interface ApiService {
 
     @GET("Finance/payment")
     Observable<Channel> getChannel(@Query("utoken") String utoken);
+
+    @GET("Finance/paymoney")
+    Observable<Channel> getAmount(@Query("utoken") String utoken);
 
     @GET("chapters/getList")
     Observable<ChapterList> chapterList(@Query("book_id") String bookId);
@@ -134,12 +139,13 @@ public interface ApiService {
 
     @GET("users/subComment")
     Observable<CommentData> subComments(@Query("book_id") String book_id,
-                                     @Query("comment") String comment,
-                                     @Query("utoken") String utoken);
+                                        @Query("comment") String comment,
+                                        @Query("utoken") String utoken);
 
     @GET("Finance/buychapter")
     Observable<PayResult> buyChapter(@Query("utoken") String utoken,
                                      @Query("chapter_id") String chapter_id);
+
     @FormUrlEncoded
     @POST("Finance/vip")
     Observable<BaseBean> buyVip(@Field("utoken") String utoken,
@@ -161,8 +167,12 @@ public interface ApiService {
     @GET("Finance/getCharges")
     Observable<ChargeHistoryData> rechargeHistory(@Query("utoken") String utoken);
 
-    @GET("util/sendcms")
+    @GET("Users/sendcms")
     Observable<BaseBean> sendcms(@Query("mobile") String mobile);
+
+    @GET("util/bindphone")
+    Observable<BaseBean> bindphone(@Query("phonecode") String mobile,
+                                   @Query("phone") String phone);
 
     @GET("users/getVipExpireTime")
     Observable<BaseBean> vipExpireTime(@Query("utoken") String utoken);
