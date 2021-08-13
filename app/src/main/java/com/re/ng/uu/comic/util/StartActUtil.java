@@ -9,6 +9,8 @@ import com.re.ng.uu.comic.base.BaseActivity;
 import com.re.ng.uu.comic.view.activity.BindPhoneActivity;
 import com.re.ng.uu.comic.view.activity.BookDetailActivity;
 import com.re.ng.uu.comic.view.activity.ComicActivity;
+import com.re.ng.uu.comic.view.activity.EditNicknameActivity;
+import com.re.ng.uu.comic.view.activity.EditPasswordActivity;
 import com.re.ng.uu.comic.view.activity.ExChangerVipActivity;
 import com.re.ng.uu.comic.view.activity.ForgetPwdActivity;
 import com.re.ng.uu.comic.view.activity.LoginActivity;
@@ -155,6 +157,30 @@ public class StartActUtil {
     public static void toBindPhone(Activity context, int code) {
         if (APP.getInstance().isUserLogin()) {
             Intent intent = new Intent(context, BindPhoneActivity.class);
+            context.startActivityForResult(intent, code);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }
+
+    public static void editPassword(Activity context, int code) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, EditPasswordActivity.class);
+            context.startActivityForResult(intent, code);
+        } else {
+            if (context instanceof BaseActivity) {
+                ((BaseActivity) context).showToast("请先登录");
+            }
+            toLogin(context);
+        }
+    }
+
+    public static void toEditInfo(Activity context, int code) {
+        if (APP.getInstance().isUserLogin()) {
+            Intent intent = new Intent(context, EditNicknameActivity.class);
             context.startActivityForResult(intent, code);
         } else {
             if (context instanceof BaseActivity) {

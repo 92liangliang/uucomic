@@ -74,7 +74,7 @@ public interface ApiService {
 
     @GET("Users/getshare")
     Observable<ShareData> getShare(
-                                  @Query("utoken") String token);
+            @Query("utoken") String token);
 
     @GET("tag/getBookList")
     Observable<BookList> tagBooks(@Query("tag") String tag,
@@ -177,16 +177,23 @@ public interface ApiService {
     @GET("Finance/buyhistory")
     Observable<BaseBean> buyhistory(@Query("utoken") String utoken);
 
-   @GET("Finance/vipexchange")
+    @GET("Finance/vipexchange")
     Observable<BaseBean> exchangeVip(@Query("utoken") String utoken,
-                                    @Query("code") String code);
+                                     @Query("code") String code);
 
-   @GET("Users/updateUser")
+    @GET("Users/updateUser")
     Observable<LoginData> refresh(@Query("utoken") String utoken);
+
+    @GET("Users/update")
+    Observable<BaseBean> updateNickName(@Query("utoken") String utoken,
+                                        @Query("nickname") String nickname);
+    @GET("Users/resetpwd")
+    Observable<BaseBean> resetPassword(@Query("utoken") String utoken,
+                                        @Query("password") String password);
 
     @GET("Users/bindphone")
     Observable<BaseBean> bindphone(@Query("utoken") String utoken,
-                                   @Query("phonecode") String mobile,
+                                   @Query("phonecode") String phonecode,
                                    @Query("phone") String phone);
 
     @GET("users/getVipExpireTime")

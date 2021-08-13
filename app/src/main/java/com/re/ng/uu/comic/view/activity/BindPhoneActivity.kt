@@ -99,7 +99,7 @@ class BindPhoneActivity : BaseActivity() {
 
         showLoadingDialog()
         UUClient.sub(
-            UUClient.getDefault().bindphone(APP.getInstance().uToken, number, verifyCode),
+            UUClient.getDefault().bindphone(APP.getInstance().uToken, verifyCode, number),
             object : SimpleObserver<BaseBean>(dialog) {
                 override fun onNext(result: BaseBean) {
                     super.onNext(result)

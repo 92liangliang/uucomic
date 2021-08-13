@@ -46,6 +46,7 @@ class MineFragment : BaseLazyFragment() {
             ll_user_info.visibility = View.VISIBLE
             rl_to_login.visibility = View.GONE
             ll_logout.visibility = View.VISIBLE
+            image_edit.visibility = View.VISIBLE
             var userInfo = APP.getInstance().userInfo
             if (TextUtils.isEmpty(userInfo.nick_name)) {
                 tv_username.text = "${userInfo.username}"
@@ -64,24 +65,7 @@ class MineFragment : BaseLazyFragment() {
             }
             tv_vip_time.text = "VIP: 剩余${days}天"
             tv_amount.text = "账户余额: ${userInfo.balance}元"
-            ll_bind_phone.setOnClickListener {
-                StartActUtil.toBindPhone(activity, LAUNCH_SECOND_ACTIVITY)
-            }
-            ll_share.setOnClickListener {
-                StartActUtil.toShare(context)
-            }
-            ll_wallet.setOnClickListener {
-                StartActUtil.toWallet(context)
-            }
-            ll_recharge.setOnClickListener {
-                StartActUtil.toRecharge(context)
-            }
-            ll_exchange_vip.setOnClickListener {
-                StartActUtil.toExchange(activity, LAUNCH_SECOND_ACTIVITY)
-            }
-            ll_get_vip.setOnClickListener {
-                StartActUtil.toGetVIP(context)
-            }
+
             ll_logout.setOnClickListener {
                 logout()
             }
@@ -95,6 +79,31 @@ class MineFragment : BaseLazyFragment() {
             ll_user_info.visibility = View.GONE
             rl_to_login.visibility = View.VISIBLE
             ll_logout.visibility = View.GONE
+            image_edit.visibility = View.GONE
+        }
+        relative_layout_info.setOnClickListener {
+            StartActUtil.toEditInfo(activity, LAUNCH_SECOND_ACTIVITY)
+        }
+        ll_edit_password.setOnClickListener {
+            StartActUtil.editPassword(activity, LAUNCH_SECOND_ACTIVITY)
+        }
+        ll_bind_phone.setOnClickListener {
+            StartActUtil.toBindPhone(activity, LAUNCH_SECOND_ACTIVITY)
+        }
+        ll_share.setOnClickListener {
+            StartActUtil.toShare(context)
+        }
+        ll_wallet.setOnClickListener {
+            StartActUtil.toWallet(context)
+        }
+        ll_recharge.setOnClickListener {
+            StartActUtil.toRecharge(context)
+        }
+        ll_exchange_vip.setOnClickListener {
+            StartActUtil.toExchange(activity, LAUNCH_SECOND_ACTIVITY)
+        }
+        ll_get_vip.setOnClickListener {
+            StartActUtil.toGetVIP(context)
         }
         iv_avatar.setOnClickListener {
             if (!APP.getInstance().isUserLogin) {

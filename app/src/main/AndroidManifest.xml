@@ -19,6 +19,8 @@
         <activity android:name=".view.activity.OpenVipActivity" />
         <activity android:name=".view.activity.RankingActivity" />
         <activity android:name=".view.activity.SearchResultActivity" />
+        <activity android:name=".view.activity.EditNicknameActivity" />
+        <activity android:name=".view.activity.EditPasswordActivity" />
         <activity android:name=".view.activity.MoreActivity" />
         <activity android:name=".view.activity.TimeActivity" />
         <activity android:name=".view.activity.ShareActivity" />

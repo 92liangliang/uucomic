@@ -43,8 +43,8 @@ class LoginActivity : BaseActivity() {
         }
         var userInfo = LitePal.findFirst(UserInfo::class.java)
         if (userInfo != null) {
-            et_username.setText(userInfo.username+"")
-            et_password.setText(userInfo.password+"")
+            et_username.setText(userInfo.username + "")
+            et_password.setText(userInfo.password + "")
         }
     }
 
@@ -70,6 +70,8 @@ class LoginActivity : BaseActivity() {
                     if (result.isSuccess) {
                         result.userInfo.password = password
                         loginSuccess(result.userInfo)
+                    } else {
+                        showToast(result.msg)
                     }
                 }
             })

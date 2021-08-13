@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <include layout="@layout/layout_top" />
+
+
+    <RelativeLayout
+            android:id="@+id/relative_layout_send"
+            android:paddingStart="20dp"
+            android:paddingEnd="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_bg_white"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="40dp">
+
+        <TextView
+                android:id="@+id/tv_verify_code"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/colorBlack"
+                android:text="昵称"
+                android:layout_height="wrap_content" />
+
+        <EditText
+                android:id="@+id/et_nick_name"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_toEndOf="@+id/tv_verify_code"
+                android:layout_toRightOf="@+id/tv_verify_code"
+                android:hint="昵称为2-8字"
+                android:maxLength="10"
+                android:textColorHint="@color/colorGray_b"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/colorBlack"
+                android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/relative_layout_submit"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/text_submit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                android:background="@drawable/shape_red"
+                android:text="保存" />
+    </RelativeLayout>
+
+</LinearLayout>
