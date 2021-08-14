@@ -144,7 +144,7 @@ public class TabDirFragment extends BaseLazyFragment {
 
                 @Override
                 public <C> void onClickItem(C data, int position) {
-                    StartActUtil.toComicAct(mBaseActivity, chapter.getChapterId(),
+                    StartActUtil.toComicAct(mBaseActivity, chapter,chapter.getChapterId(),
                             chapter.getChapter_name());
                 }
 

@@ -186,14 +186,14 @@ class BookDetailActivity : BaseActivity() {
         }
         if (mRecentReadChapter != null) {
             StartActUtil.toComicAct(
-                this@BookDetailActivity,
+                this@BookDetailActivity, mRecentReadChapter,
                 mRecentReadChapter!!.chapterId,
                 mRecentReadChapter!!.chapter_name
             )
             addHistory(mRecentReadChapter!!)
         } else if (mFirstChapterBean != null) {
             StartActUtil.toComicAct(
-                this@BookDetailActivity,
+                this@BookDetailActivity, mRecentReadChapter,
                 mFirstChapterBean!!.chapterId,
                 mRecentReadChapter!!.chapter_name
             )
@@ -232,9 +232,10 @@ class BookDetailActivity : BaseActivity() {
     }
 
     private fun getBookDetail() {
+        showLoadingDialog()
         UUClient.sub(
             UUClient.getDefault().bookDetail(mBookId),
-            object : SimpleObserver<BookDetail>() {
+            object : SimpleObserver<BookDetail>(dialog) {
                 override fun onNext(result: BookDetail) {
                     super.onNext(result)
                     if (result.isSuccess) {

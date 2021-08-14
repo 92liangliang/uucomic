@@ -187,12 +187,12 @@ class HomeFragment : BaseLazyFragment() {
     }
 
     private fun getEndBooks() {
-        UUClient.sub(UUClient.getDefault().endBooks(), object : SimpleObserver<EndBooks>() {
-            override fun onNext(result: EndBooks) {
+        UUClient.sub(UUClient.getDefault().tagBooks(1,1,100), object : SimpleObserver<BookList>() {
+            override fun onNext(result: BookList) {
                 super.onNext(result)
-                if (result.ends != null) {
+                if (result.books != null) {
                     var itemBean = ItemBean()
-                    itemBean.bookBeanList = result.ends
+                    itemBean.bookBeanList = result.books
                     itemBean.title = "完结"
                     itemBean.intro = ""
                     itemBean.iconResId = R.mipmap.svg_pic_list_dream

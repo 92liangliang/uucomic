@@ -50,7 +50,7 @@ public class MoreFragment : BaseAbsFragment() {
             getEndBooks()
         } else if (mType.equals("热血")) {
             getTagBooks("热血")
-        }else if (mType.equals("购买作品")) {
+        } else if (mType.equals("购买作品")) {
             getHistory()
         }
     }
@@ -94,15 +94,14 @@ public class MoreFragment : BaseAbsFragment() {
 
     private fun getEndBooks() {
         showLoadingDialog()
-        UUClient.sub(UUClient.getDefault().endBooks(),
-            object : SimpleObserver<EndBooks>(mDialog) {
-                override fun onNext(result: EndBooks) {
-                    super.onNext(result)
-                    if (result.ends != null) {
-                        setList(result.ends)
-                    }
+        UUClient.sub(UUClient.getDefault().tagBooks(1,1,100), object : SimpleObserver<BookList>(mDialog) {
+            override fun onNext(result: BookList) {
+                super.onNext(result)
+                if (result.books != null) {
+                    setList(result.books)
                 }
-            })
+            }
+        })
     }
 
     private fun getTagBooks(tag: String) {
@@ -118,7 +117,7 @@ public class MoreFragment : BaseAbsFragment() {
             })
     }
 
-    private fun getHistory( ) {
+    private fun getHistory() {
         showLoadingDialog()
         UUClient.sub(UUClient.getDefault().buyhistory(APP.getInstance().uToken),
             object : SimpleObserver<BaseBean>(mDialog) {

@@ -37,9 +37,11 @@ import com.re.ng.uu.comic.http.bean.BookBean;
 import com.re.ng.uu.comic.http.bean.ChapterBean;
 import com.re.ng.uu.comic.http.bean.ChapterDetail;
 import com.re.ng.uu.comic.http.bean.ComicBean;
+import com.re.ng.uu.comic.http.bean.UserInfo;
 import com.re.ng.uu.comic.http.bean.rv_cell.ComicCell;
 import com.re.ng.uu.comic.http.bean.rv_cell.DirCell;
 import com.re.ng.uu.comic.util.LogUtil;
+import com.re.ng.uu.comic.util.StartActUtil;
 import com.re.ng.uu.comic.util.diffUtil.ComicDiffUtil;
 import com.re.ng.uu.comic.view.dialog.PayDialog;
 import com.re.ng.uu.comic.view.widget.PanelManage;
@@ -166,6 +168,7 @@ public class ComicActivity extends BaseActivity {
         Intent intent = getIntent();
         if (intent != null) {
             mStartChapterId = intent.getStringExtra("chapterId");
+            mChapterBean = intent.getParcelableExtra("chapterBean");
             getChapterDetail(mStartChapterId, false, null);
         }
         mPanelManage = new PanelManage(
@@ -182,7 +185,7 @@ public class ComicActivity extends BaseActivity {
             public boolean handleMessage(Message msg) {
                 // 使用Handler刷新数据，因为RecyclerView在滑动时或onComputingLayout()计算布局时
                 // notifyDataChanged()可能会造成出错
-                LogUtil.d(UUClient.TAG, "msg: "+msg.what+" , "+isIDLE+" , "+needUpdate);
+                LogUtil.d(UUClient.TAG, "msg: " + msg.what + " , " + isIDLE + " , " + needUpdate);
                 switch (msg.what) {
                     case SCROLL_STATE_IDLE:
                         isIDLE = true;
@@ -259,8 +262,31 @@ public class ComicActivity extends BaseActivity {
     }
 
     private void getChapterDetail(String chapterId, final boolean menu, final String chapterName) {
+        if (mChapterBean != null) {
+            if (mChapterBean.isNeedMoney()) {
+                if (APP.getInstance().isUserLogin()) {
+                    UserInfo userInfo = APP.getInstance().getUserInfo();
+                    int vipTime = userInfo.getVip_expire_time();
+                    if (vipTime > 0) {
+                        getCdetail(chapterId, menu, chapterName);
+                    } else {
+                        showToast("请先充值");
+                    }
+                } else {
+                    showToast("请先登录");
+                    StartActUtil.toLogin(this);
+                }
+            } else {
+                getCdetail(chapterId, menu, chapterName);
+            }
+        }
+    }
+
+    private void getCdetail(String chapterId, final boolean menu, final String chapterName) {
         String uToken = APP.getInstance().getUToken();
-        UUClient.sub(UUClient.getDefault().chapterDetail(chapterId, uToken), new SimpleObserver<ChapterDetail>() {
+        showLoadingDialog();
+        UUClient.sub(UUClient.getDefault().
+                chapterDetail(chapterId, uToken), new SimpleObserver<ChapterDetail>(dialog) {
             @Override
             public void onNext(ChapterDetail result) {
                 super.onNext(result);
@@ -279,7 +305,22 @@ public class ComicActivity extends BaseActivity {
                     if (result.getSuccess() != 0) {
                         showPayDialog(chapterId, result.getMoney(), chapterName);
                     } else {
-                        showToast("code " + result.getSuccess() + " 加载失败");
+                        if (result.getMoney() != null) {
+                            if (APP.getInstance().isUserLogin()) {
+                                UserInfo userInfo = APP.getInstance().getUserInfo();
+                                int vipTime = userInfo.getVip_expire_time();
+                                if (vipTime > 0) {
+                                    getCdetail(chapterId, menu, chapterName);
+                                } else {
+                                    showToast("请先充值");
+                                }
+                            } else {
+                                showToast("请先登录");
+                                StartActUtil.toLogin(ComicActivity.this);
+                            }
+                        } else {
+                            showToast("code " + result.getSuccess() + " 加载失败");
+                        }
                     }
                 }
             }
@@ -605,8 +646,8 @@ public class ComicActivity extends BaseActivity {
             updateComic(newComicList, mOldComicList);
             mOldComicList.clear();
             mOldComicList.addAll(newComicList);
-        }else {
-            getChapterDetail(mChapterBean.getNext()+"", false, "下一话");
+        } else {
+            getChapterDetail(mChapterBean.getNext() + "", false, "下一话");
         }
     }
 
@@ -643,7 +684,7 @@ public class ComicActivity extends BaseActivity {
     }
 
     public void setDirItemSelected(int index) {
-        if(index >= mDirList.size()){
+        if (index >= mDirList.size()) {
             return;
         }
         if (mDirList.get(index).isChecked()) {

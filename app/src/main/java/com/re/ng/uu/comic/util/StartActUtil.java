@@ -6,6 +6,8 @@ import android.content.Intent;
 
 import com.re.ng.uu.comic.APP;
 import com.re.ng.uu.comic.base.BaseActivity;
+import com.re.ng.uu.comic.http.bean.ChapterBean;
+import com.re.ng.uu.comic.http.bean.UserInfo;
 import com.re.ng.uu.comic.view.activity.BindPhoneActivity;
 import com.re.ng.uu.comic.view.activity.BookDetailActivity;
 import com.re.ng.uu.comic.view.activity.ComicActivity;
@@ -56,11 +58,35 @@ public class StartActUtil {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
-    public static void toComicAct(Context context, String chapterId, String title) {
-        Intent intent = new Intent(context, ComicActivity.class);
-        intent.putExtra("chapterId", chapterId);
-        intent.putExtra("title", title);
-        context.startActivity(intent);
+    public static void toComicAct(Context context, ChapterBean chapterBean, String chapterId, String title) {
+        if (chapterBean.isNeedMoney()) {
+            if (APP.getInstance().isUserLogin()) {
+                UserInfo userInfo = APP.getInstance().getUserInfo();
+                int vipTime = userInfo.getVip_expire_time();
+                if (vipTime > 0) {
+                    Intent intent = new Intent(context, ComicActivity.class);
+                    intent.putExtra("chapterId", chapterId);
+                    intent.putExtra("title", title);
+                    intent.putExtra("chapterBean", chapterBean);
+                    context.startActivity(intent);
+                } else {
+                    if (context instanceof BaseActivity) {
+                        ((BaseActivity) context).showToast("请先充值");
+                    }
+                }
+            } else {
+                if (context instanceof BaseActivity) {
+                    ((BaseActivity) context).showToast("请先登录");
+                }
+                toLogin(context);
+            }
+        } else {
+            Intent intent = new Intent(context, ComicActivity.class);
+            intent.putExtra("chapterId", chapterId);
+            intent.putExtra("title", title);
+            intent.putExtra("chapterBean", chapterBean);
+            context.startActivity(intent);
+        }
     }
 
     public static void toBookBillAct(Context context, int type) {

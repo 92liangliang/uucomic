@@ -88,6 +88,12 @@ public interface ApiService {
                                   @Query("startItem") int page,
                                   @Query("pageSize") int pageSize);
 
+    @GET("tag/getBookList")
+    Observable<BookList> tagBooks(@Query("end") int end,
+                                  @Query("startItem") int page,
+                                  @Query("pageSize") int pageSize);
+
+
     @GET("books/detail")
     Observable<BookDetail> bookDetail(@Query("id") String id);
 
@@ -187,9 +193,10 @@ public interface ApiService {
     @GET("Users/update")
     Observable<BaseBean> updateNickName(@Query("utoken") String utoken,
                                         @Query("nickname") String nickname);
+
     @GET("Users/resetpwd")
     Observable<BaseBean> resetPassword(@Query("utoken") String utoken,
-                                        @Query("password") String password);
+                                       @Query("password") String password);
 
     @GET("Users/bindphone")
     Observable<BaseBean> bindphone(@Query("utoken") String utoken,

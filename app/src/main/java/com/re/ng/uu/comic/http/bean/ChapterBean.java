@@ -1,5 +1,8 @@
 package com.re.ng.uu.comic.http.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.litepal.annotation.Column;
@@ -10,7 +13,7 @@ import java.util.List;
 /**
  * Date    : 2020-11-02
  */
-public class ChapterBean extends LitePalSupport implements Cloneable {
+public class ChapterBean extends LitePalSupport implements Cloneable, Parcelable {
 
     @Column(ignore = true)
     public final static int NO_CHAPTER_ID = 0;
@@ -41,6 +44,53 @@ public class ChapterBean extends LitePalSupport implements Cloneable {
     private boolean hasRedPoint;
 
     private boolean isNeedMoney;
+
+    public ChapterBean() {
+    }
+
+    protected ChapterBean(Parcel in) {
+        next = in.readString();
+        prev = in.readString();
+        chapter_order = in.readString();
+        bookId = in.readInt();
+        chapter_name = in.readString();
+        chapterId = in.readString();
+        isRead = in.readByte() != 0;
+        isChecked = in.readByte() != 0;
+        hasRedPoint = in.readByte() != 0;
+        isNeedMoney = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(next);
+        dest.writeString(prev);
+        dest.writeString(chapter_order);
+        dest.writeInt(bookId);
+        dest.writeString(chapter_name);
+        dest.writeString(chapterId);
+        dest.writeByte((byte) (isRead ? 1 : 0));
+        dest.writeByte((byte) (isChecked ? 1 : 0));
+        dest.writeByte((byte) (hasRedPoint ? 1 : 0));
+        dest.writeByte((byte) (isNeedMoney ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ChapterBean> CREATOR = new Creator<ChapterBean>() {
+        @Override
+        public ChapterBean createFromParcel(Parcel in) {
+            return new ChapterBean(in);
+        }
+
+        @Override
+        public ChapterBean[] newArray(int size) {
+            return new ChapterBean[size];
+        }
+    };
 
     public boolean isNeedMoney() {
         return isNeedMoney;
@@ -141,4 +191,5 @@ public class ChapterBean extends LitePalSupport implements Cloneable {
         }catch (Exception e){}
         return num;
     }
+
 }

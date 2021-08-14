@@ -190,20 +190,19 @@ class RankingActivity : BaseActivity() {
     private fun getEndBooks() {
         showLoadingDialog()
         mHistoryAdapter.clear()
-        UUClient.sub(UUClient.getDefault().endBooks(),
-            object : SimpleObserver<EndBooks>(dialog) {
-                override fun onNext(result: EndBooks) {
-                    super.onNext(result)
-                    if (result.ends != null) {
-                        addList(result.ends)
-                    }
+        UUClient.sub(UUClient.getDefault().tagBooks(1,1,100), object : SimpleObserver<BookList>() {
+            override fun onNext(result: BookList) {
+                super.onNext(result)
+                if (result.books != null) {
+                    addList(result.books)
                 }
+            }
 
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    refreshLayout.finishRefresh()
-                }
-            })
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                refreshLayout.finishRefresh()
+            }
+        })
     }
 
     private fun mostCharged() {
