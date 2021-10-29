@@ -9,8 +9,8 @@ android {
         applicationId "com.re.ng.uu.comic"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 100
-        versionName "1.0.0"
+        versionCode 101
+        versionName "1.0.1"
 
         multiDexEnabled true
 
@@ -37,7 +37,14 @@ android {
             signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def relativeRootDir = output.packageApplication.outputDirectory.toPath()
+                            .relativize(rootDir.toPath()).toFile()
+                    def fileName = "9uu_v${versionName}_${variant.name}.apk"
+                    output.outputFileName = new File("$relativeRootDir/apk/", fileName)
+                }
+            }  }
 
         debug {
             signingConfig signingConfigs.config

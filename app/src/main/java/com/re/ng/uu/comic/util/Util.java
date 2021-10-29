@@ -47,7 +47,7 @@ public class Util {
     }
 
     public static void openCustomerService(Context context) {
-        openBrowser(context, "https://direct.lc.chat/12218097/");
+        openBrowser(context, "https://direct.lc.chat/13210860/");
     }
 
     public static void openHtmlWithWebview(Context context, String html){
